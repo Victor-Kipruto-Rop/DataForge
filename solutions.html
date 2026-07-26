@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Solutions | DataForge Labs</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dfBg: '#040816',
+                        dfSecondaryBg: '#0A1022',
+                        dfCard: 'rgba(255, 255, 255, 0.03)',
+                        dfPrimary: '#00E676',
+                        dfSecondary: '#00B8FF',
+                        dfAccent: '#7C4DFF',
+                        dfHighlight: '#00FFD1',
+                        dfText: '#FFFFFF',
+                        dfMuted: '#B7C3D7',
+                        dfBorder: 'rgba(255, 255, 255, 0.08)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    keyframes: {
+                        aurora: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    },
+                    animation: {
+                        aurora: 'aurora 15s ease infinite alternate',
+                        float: 'float 6s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            background-color: #040816;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(4, 8, 22, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 184, 255, 0.4);
+            box-shadow: 0 0 35px rgba(0, 184, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .aurora-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            filter: blur(140px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.35;
+            animation: aurora 12s infinite alternate;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #040816;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #FFFFFF 30%, #B7C3D7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-glow {
+            background: linear-gradient(135deg, #00B8FF 0%, #00E676 50%, #7C4DFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid-overlay {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="custom-scrollbar grid-overlay">
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-dfSecondary via-dfPrimary to-dfAccent z-50 w-0 transition-all duration-75"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-dfSecondary to-dfPrimary p-[1px] flex items-center justify-center transition-transform group-hover:scale-105">
+                    <div class="w-full h-full bg-dfBg rounded-xl flex items-center justify-center">
+                        <i data-lucide="cpu" class="w-5 h-5 text-dfSecondary group-hover:text-dfHighlight transition-colors"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-xl tracking-wide text-white">DataForge <span class="text-dfSecondary">Labs</span></span>
+                    <span class="text-[10px] tracking-widest text-dfMuted uppercase font-medium">Enterprise Solutions</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-dfMuted">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="about.html" class="hover:text-white transition-colors">About</a>
+                <a href="solutions.html" class="text-white font-semibold transition-colors">Solutions</a>
+                <a href="careers.html" class="hover:text-white transition-colors">Careers</a>
+                <a href="index.html#contact" class="hover:text-white transition-colors">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="index.html#contact" class="px-5 py-2.5 bg-gradient-to-r from-dfSecondary to-dfPrimary text-dfBg font-bold rounded-xl text-xs hover:opacity-95 transition-all shadow-lg shadow-dfSecondary/20 flex items-center gap-2">
+                    <span>Consult Architects</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-24">
+
+        <!-- Hero Section -->
+        <section class="relative min-h-[60vh] flex items-center justify-center text-center px-6 overflow-hidden">
+            <div class="aurora-bg bg-dfSecondary top-10 left-1/4"></div>
+            <div class="aurora-bg bg-dfAccent bottom-10 right-1/4"></div>
+
+            <div class="max-w-4xl mx-auto space-y-6 z-10 animate-float">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dfSecondaryBg border border-dfBorder text-xs font-medium text-dfHighlight shadow-lg">
+                    <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                    <span>Vertical Infrastructure Architectures</span>
+                </div>
+
+                <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gradient">
+                    Tailored Solutions for <span class="text-glow">Regulated Industries</span>
+                </h1>
+
+                <p class="text-lg sm:text-xl text-dfMuted max-w-2xl mx-auto font-light leading-relaxed">
+                    Purpose-built data pipelines, autonomous AI agents, and uncompromising compliance frameworks designed for high-stakes enterprise environments.
+                </p>
+            </div>
+        </section>
+
+        <!-- Solutions Verticals Detailed Grid -->
+        <section class="py-16 max-w-7xl mx-auto px-6 space-y-16">
+            
+            <!-- Vertical 1: Financial Services -->
+            <div class="glass-card rounded-3xl p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-dfPrimary/10 text-dfPrimary text-xs font-mono">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Financial Services & Banking
+                    </div>
+                    <h2 class="font-display text-3xl font-bold text-white">Real-Time Fraud Detection & PesaGuard Integration</h2>
+                    <p class="text-dfMuted text-base font-light leading-relaxed">
+                        High-frequency transaction reconciliation requires sub-millisecond precision. DataForge Labs enables global banking institutions to process billions of financial events daily with zero packet loss and instant anomaly isolation.
+                    </p>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-dfMuted font-mono pt-2">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-dfPrimary"></i> PCI-DSS Level 1 Certified</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-dfPrimary"></i> Sub-15ms reconciliation latency</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-dfPrimary"></i> Autonomous fraud isolation agents</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-dfPrimary"></i> Active-active multi-region failover</li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-5 bg-dfSecondaryBg rounded-2xl p-6 border border-dfBorder font-mono text-xs space-y-4">
+                    <div class="text-dfPrimary flex items-center justify-between pb-3 border-b border-dfBorder">
+                        <span>[PesaGuard-Telemetry]</span>
+                        <span class="text-dfHighlight">STATUS: ACTIVE</span>
+                    </div>
+                    <div class="space-y-2 text-dfMuted text-[11px]">
+                        <div>&gt; Ingesting Kafka stream (US-East)... [OK]</div>
+                        <div>&gt; Neural reconciliation model v4... [OPTIMAL]</div>
+                        <div>&gt; Detected anomalous spike: 0 flagged tx.</div>
+                        <div class="text-dfPrimary">&gt; Daily throughput: 450M events securely verified.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vertical 2: Healthcare & Life Sciences -->
+            <div class="glass-card rounded-3xl p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-5 order-2 lg:order-1 bg-dfSecondaryBg rounded-2xl p-6 border border-dfBorder font-mono text-xs space-y-4">
+                    <div class="text-dfSecondary flex items-center justify-between pb-3 border-b border-dfBorder">
+                        <span>[HIPAA-Audit-Engine]</span>
+                        <span class="text-dfHighlight">ENCRYPTED</span>
+                    </div>
+                    <div class="space-y-2 text-dfMuted text-[11px]">
+                        <div>&gt; Patient telemetry node sync... [SECURE]</div>
+                        <div>&gt; Zero-knowledge encryption layer... [ACTIVE]</div>
+                        <div>&gt; Automated GDPR/HIPAA compliance scan... [PASSED]</div>
+                        <div class="text-dfSecondary">&gt; Zero security breaches recorded.</div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 order-1 lg:order-2 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-dfSecondary/10 text-dfSecondary text-xs font-mono">
+                        <i data-lucide="activity" class="w-3.5 h-3.5"></i> Healthcare & Life Sciences
+                    </div>
+                    <h2 class="font-display text-3xl font-bold text-white">HIPAA-Compliant Patient Data Pipelines & Analytics</h2>
+                    <p class="text-dfMuted text-base font-light leading-relaxed">
+                        Securely connect clinical records, genomics datasets, and patient monitoring streams without compromising privacy. Our zero-knowledge architecture enforces granular access control and automated regulatory compliance.
+                    </p>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-dfMuted font-mono pt-2">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-dfSecondary"></i> HIPAA & HITRUST compliance</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-dfSecondary"></i> End-to-end AES-256 encryption</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-dfSecondary"></i> Real-time clinical analytics</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-dfSecondary"></i> Automated audit trail generation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Vertical 3: Global E-Commerce -->
+            <div class="glass-card rounded-3xl p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-dfAccent/10 text-dfAccent text-xs font-mono">
+                        <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> Global E-Commerce & Retail
+                    </div>
+                    <h2 class="font-display text-3xl font-bold text-white">Real-Time Inventory Sync & Demand Forecasting</h2>
+                    <p class="text-dfMuted text-base font-light leading-relaxed">
+                        Eliminate stockouts and overselling during peak traffic events like Black Friday. DataForge Labs synchronizes millions of global SKU inventory states in real-time across distributed edge locations.
+                    </p>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-dfMuted font-mono pt-2">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-dfAccent"></i> 99.99% availability SLA</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-dfAccent"></i> Multi-region edge inventory sync</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-dfAccent"></i> Autonomous predictive scaling</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-dfAccent"></i> Instant SQL catalog search</li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-5 bg-dfSecondaryBg rounded-2xl p-6 border border-dfBorder font-mono text-xs space-y-4">
+                    <div class="text-dfAccent flex items-center justify-between pb-3 border-b border-dfBorder">
+                        <span>[Edge-Sync-Metrics]</span>
+                        <span class="text-dfHighlight">PEAK LOAD</span>
+                    </div>
+                    <div class="space-y-2 text-dfMuted text-[11px]">
+                        <div>&gt; Active SKU nodes: 12,400,000</div>
+                        <div>&gt; Global synchronization delay: 4.2ms</div>
+                        <div>&gt; Autonomous scaling agents deployed: 32</div>
+                        <div class="text-dfAccent">&gt; Traffic surge handled with 0 latency spike.</div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- CTA Banner -->
+        <section class="py-16 max-w-7xl mx-auto px-6 text-center">
+            <div class="glass-card rounded-3xl p-12 relative overflow-hidden border border-dfBorder">
+                <div class="absolute inset-0 bg-gradient-to-r from-dfSecondary/10 via-dfPrimary/10 to-dfAccent/15 opacity-50"></div>
+                <div class="relative z-10 space-y-6 max-w-3xl mx-auto">
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white">Need a Custom Architecture for Your Enterprise?</h2>
+                    <p class="text-dfMuted text-base font-light">Our lead infrastructure engineers can design a custom multi-region data pipeline tailored to your exact stack.</p>
+                    <div class="pt-4 flex justify-center gap-4">
+                        <a href="index.html#contact" class="px-8 py-4 bg-dfSecondary text-dfBg font-bold rounded-xl hover:opacity-90 transition-all shadow-lg shadow-dfSecondary/20 flex items-center gap-2">
+                            <span>Schedule Architecture Consultation</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dfSecondaryBg border-t border-dfBorder py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-dfMuted">
+            <div>&copy; 2026 DataForge Labs, Inc. All rights reserved.</div>
+            <div class="flex items-center gap-6 mt-4 sm:mt-0">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="about.html" class="hover:text-white transition-colors">About Us</a>
+                <a href="solutions.html" class="text-white transition-colors">Solutions</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        lucide.createIcons();
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+    </script>
+</body>
+</html>
+
