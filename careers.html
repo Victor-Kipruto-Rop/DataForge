@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Engineering Case Studies | DataForge Labs</title>
+    <title>Enterprise Careers & Engineering Culture | DataForge Labs</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -131,22 +131,22 @@
                     </div>
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-display font-bold text-xl tracking-wide text-white">DataForge <span class="text-dfPrimary">Engineering</span></span>
-                    <span class="text-[10px] tracking-widest text-dfMuted uppercase font-medium">Production Case Studies</span>
+                    <span class="font-display font-bold text-xl tracking-wide text-white">DataForge <span class="text-dfPrimary">Careers</span></span>
+                    <span class="text-[10px] tracking-widest text-dfMuted uppercase font-medium">Engineering Culture</span>
                 </div>
             </a>
 
             <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-dfMuted">
                 <a href="index.html" class="hover:text-white transition-colors">Home</a>
                 <a href="solutions.html" class="hover:text-white transition-colors">Solutions</a>
-                <a href="customers.html" class="text-white font-semibold transition-colors">Case Studies</a>
-                <a href="pricing.html" class="hover:text-white transition-colors">Pricing</a>
+                <a href="customers.html" class="hover:text-white transition-colors">Case Studies</a>
+                <a href="careers.html" class="text-white font-semibold transition-colors">Careers</a>
                 <a href="docs.html" class="hover:text-white transition-colors">Docs</a>
             </nav>
 
             <div class="flex items-center gap-4">
-                <a href="index.html#contact" class="px-5 py-2.5 bg-gradient-to-r from-dfPrimary to-dfHighlight text-dfBg font-bold rounded-xl text-xs hover:opacity-95 transition-all shadow-lg shadow-dfPrimary/20 flex items-center gap-2">
-                    <span>Talk to Architecture</span>
+                <a href="#openings" class="px-5 py-2.5 bg-gradient-to-r from-dfPrimary to-dfHighlight text-dfBg font-bold rounded-xl text-xs hover:opacity-95 transition-all shadow-lg shadow-dfPrimary/20 flex items-center gap-2">
+                    <span>View Open Roles</span>
                     <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </a>
             </div>
@@ -154,141 +154,130 @@
     </header>
 
     <!-- Main Content -->
-    <main class="pt-32 pb-24 max-w-7xl mx-auto px-6 space-y-16">
+    <main class="pt-32 pb-24 max-w-7xl mx-auto px-6 space-y-20">
         <div class="aurora-bg bg-dfPrimary top-20 left-10"></div>
         <div class="aurora-bg bg-dfAccent bottom-10 right-10"></div>
 
-        <!-- Header -->
-        <div class="space-y-4 text-center max-w-3xl mx-auto">
+        <!-- Hero Section -->
+        <div class="space-y-6 text-center max-w-4xl mx-auto">
             <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-dfPrimary/10 text-dfPrimary text-xs font-mono">
-                <i data-lucide="terminal" class="w-4 h-4"></i> Production Case Studies & Architecture
+                <i data-lucide="terminal" class="w-4 h-4"></i> Distributed Systems & AI Infrastructure
             </div>
-            <h1 class="font-display text-4xl sm:text-6xl font-bold text-white">How Engineering Teams Scale on DataForge</h1>
-            <p class="text-dfMuted text-base font-light">
-                Unfiltered technical breakdowns from core infrastructure leads scaling high-throughput Kafka clusters, real-time banking reconciliation, and multi-region data lakes.
+            <h1 class="font-display text-4xl sm:text-6xl font-bold text-white tracking-tight leading-tight">
+                Build the Future of <span class="text-gradient">Real-Time Data Infrastructure</span>
+            </h1>
+            <p class="text-dfMuted text-lg font-light max-w-2xl mx-auto leading-relaxed">
+                We are a lean, senior-heavy engineering team building low-latency stream processing engines in Rust and Python. No bureaucratic overhead—just hard engineering problems at global scale.
             </p>
         </div>
 
-        <!-- Case Studies Grid -->
-        <div class="space-y-12">
-            
-            <!-- Case Study 1: Stanbic Kenya / Financial Ledger -->
-            <div class="glass-card rounded-3xl p-8 lg:p-12 border border-dfBorder space-y-8">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-dfBorder">
-                    <div>
-                        <div class="text-xs font-mono text-dfPrimary uppercase tracking-widest">Core Banking & Financial Settlement</div>
-                        <h2 class="font-display text-2xl lg:text-3xl font-bold text-white mt-1">Stanbic Kenya: Eliminating Batch Reconciliation Latency</h2>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="px-3 py-1.5 rounded-full bg-dfPrimary/10 border border-dfPrimary/30 text-xs font-mono text-dfPrimary">
-                            PesaGuard + PipeForge
-                        </span>
-                    </div>
+        <!-- Engineering Principles -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-card rounded-3xl p-8 space-y-4 border border-dfBorder">
+                <div class="w-12 h-12 rounded-xl bg-dfPrimary/10 text-dfPrimary flex items-center justify-center">
+                    <i data-lucide="zap" class="w-6 h-6"></i>
                 </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    <div class="lg:col-span-7 space-y-4 text-sm text-dfMuted font-light leading-relaxed">
-                        <p>
-                            <strong class="text-white">The Challenge:</strong> Stanbic Kenya’s legacy end-of-day batch settlement jobs routinely caused 4-hour processing queues during peak transactional spikes, making real-time fraud detection impossible across multi-branch ATM and mobile channels.
-                        </p>
-                        <p>
-                            <strong class="text-white">The Solution:</strong> The infrastructure engineering team migrated their core event streams from isolated on-premise servers to a distributed DataForge multi-region cluster utilizing <code class="text-dfPrimary font-mono">PesaGuard</code> for atomic double-entry verification and <code class="text-secondary font-mono">PipeForge</code> for zero-latency Kafka DAG execution.
-                        </p>
-                        <div class="p-4 rounded-2xl bg-dfBg border border-dfBorder font-mono text-xs text-dfMuted space-y-1">
-                            <div class="text-white font-semibold">Technical Stack Migration:</div>
-                            <div>• Ingestion: Apache Kafka (US-East / EU-Central)</div>
-                            <div>• Engine: PesaGuard Atomic Reconciliation v4.5</div>
-                            <div>• Sink: Enterprise Snowflake Data Warehouse</div>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-5 bg-dfSecondaryBg rounded-2xl p-6 border border-dfBorder space-y-6">
-                        <div class="font-display font-bold text-white text-base">Verified Production Metrics</div>
-                        <div class="space-y-4 font-mono text-xs">
-                            <div class="flex justify-between items-center pb-3 border-b border-dfBorder">
-                                <span class="text-dfMuted">Reconciliation Latency</span>
-                                <span class="text-dfPrimary font-bold text-sm">12ms (down from 4 hrs)</span>
-                            </div>
-                            <div class="flex justify-between items-center pb-3 border-b border-dfBorder">
-                                <span class="text-dfMuted">Daily Transaction Volume</span>
-                                <span class="text-white font-bold text-sm">4.5M events/sec</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-dfMuted">Discrepancy Resolution</span>
-                                <span class="text-dfHighlight font-bold text-sm">100% Autonomous</span>
-                            </div>
-                        </div>
-                        <blockquote class="text-xs text-dfMuted italic border-l-2 border-dfPrimary pl-4 py-1">
-                            "DataForge allowed us to transition from batch auditing to continuous sub-millisecond ledger balancing without rewriting our core banking schemas."
-                        </blockquote>
-                    </div>
-                </div>
+                <h3 class="font-display text-xl font-bold text-white">Zero Bureaucracy</h3>
+                <p class="text-sm text-dfMuted font-light leading-relaxed">
+                    Decisions are made by the engineers writing the code. Direct access to production clusters and real feedback loops from tier-1 financial institutions.
+                </p>
             </div>
 
-            <!-- Case Study 2: Global Payment Gateway / Data Quality & Observability -->
-            <div class="glass-card rounded-3xl p-8 lg:p-12 border border-dfBorder space-y-8">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-dfBorder">
-                    <div>
-                        <div class="text-xs font-mono text-dfSecondary uppercase tracking-widest">High-Volume Payment Ingestion</div>
-                        <h2 class="font-display text-2xl lg:text-3xl font-bold text-white mt-1">Tier-1 Payment Processor: Stopping Schema Drift Outages</h2>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="px-3 py-1.5 rounded-full bg-dfSecondary/10 border border-dfSecondary/30 text-xs font-mono text-dfSecondary">
-                            DataPure AI + ObserveFlow
-                        </span>
-                    </div>
+            <div class="glass-card rounded-3xl p-8 space-y-4 border border-dfBorder">
+                <div class="w-12 h-12 rounded-xl bg-dfSecondary/10 text-dfSecondary flex items-center justify-center">
+                    <i data-lucide="cpu" class="w-6 h-6"></i>
                 </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    <div class="lg:col-span-7 space-y-4 text-sm text-dfMuted font-light leading-relaxed">
-                        <p>
-                            <strong class="text-white">The Challenge:</strong> Frequent, undocumented payload alterations from international payment acquirers caused downstream Spark ETL pipeline failures, breaking analytics dashboards and alerting on-call engineers at midnight.
-                        </p>
-                        <p>
-                            <strong class="text-white">The Solution:</strong> Deployed <code class="text-dfSecondary font-mono">DataPure AI</code> neural sanitization agents and <code class="text-dfHighlight font-mono">ObserveFlow</code> predictive telemetry. Incoming payloads with type mismatches are now dynamically patched or isolated into quarantine buckets without halting pipeline throughput.
-                        </p>
-                        <div class="p-4 rounded-2xl bg-dfBg border border-dfBorder font-mono text-xs text-dfMuted space-y-1">
-                            <div class="text-white font-semibold">Technical Stack Migration:</div>
-                            <div>• Ingestion: REST Webhooks & Kafka Sinks</div>
-                            <div>• AI Layer: DataPure Autonomous Schema Patching</div>
-                            <div>• Monitoring: ObserveFlow Predictive Prometheus Telemetry</div>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-5 bg-dfSecondaryBg rounded-2xl p-6 border border-dfBorder space-y-6">
-                        <div class="font-display font-bold text-white text-base">Verified Production Metrics</div>
-                        <div class="space-y-4 font-mono text-xs">
-                            <div class="flex justify-between items-center pb-3 border-b border-dfBorder">
-                                <span class="text-dfMuted">Pipeline Outages Caused by Schema Drift</span>
-                                <span class="text-dfSecondary font-bold text-sm">Zero (down from 14/mo)</span>
-                            </div>
-                            <div class="flex justify-between items-center pb-3 border-b border-dfBorder">
-                                <span class="text-dfMuted">Anomaly Detection Speed</span>
-                                <span class="text-white font-bold text-sm">&lt; 4.1ms</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-dfMuted">Engineering On-Call Pages</span>
-                                <span class="text-dfHighlight font-bold text-sm">-92% Reduction</span>
-                            </div>
-                        </div>
-                        <blockquote class="text-xs text-dfMuted italic border-l-2 border-dfSecondary pl-4 py-1">
-                            "DataPure AI acts like an intelligent shock absorber for our data streams. Upstream changes no longer break our analytical pipelines."
-                        </blockquote>
-                    </div>
-                </div>
+                <h3 class="font-display text-xl font-bold text-white">Rust & Python Core</h3>
+                <p class="text-sm text-dfMuted font-light leading-relaxed">
+                    Our streaming engine core is built in Rust for absolute memory safety and sub-millisecond throughput, paired with Python for our LLM agent control planes.
+                </p>
             </div>
 
+            <div class="glass-card rounded-3xl p-8 space-y-4 border border-dfBorder">
+                <div class="w-12 h-12 rounded-xl bg-dfAccent/10 text-dfAccent flex items-center justify-center">
+                    <i data-lucide="globe" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-display text-xl font-bold text-white">Distributed First</h3>
+                <p class="text-sm text-dfMuted font-light leading-relaxed">
+                    Work from anywhere across global time zones with competitive compensation packages, equitable stock options, and uncompromised autonomy.
+                </p>
+            </div>
+        </div>
+
+        <!-- Open Roles Section -->
+        <div id="openings" class="space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <div class="text-xs font-mono text-dfPrimary uppercase tracking-widest">Join Our Team</div>
+                    <h2 class="font-display text-3xl font-bold text-white mt-1">Open Engineering Positions</h2>
+                </div>
+                <span class="text-xs font-mono text-dfMuted bg-dfSecondaryBg px-3 py-1.5 rounded-full border border-dfBorder">
+                    REMOTE / GLOBAL HUBS
+                </span>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- Role 1 -->
+                <div class="glass-card rounded-2xl p-6 sm:p-8 border border-dfBorder flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3">
+                            <span class="font-display font-bold text-white text-lg">Senior Distributed Systems Engineer (Rust)</span>
+                            <span class="text-[10px] font-mono bg-dfPrimary/10 text-dfPrimary px-2.5 py-0.5 rounded">Core Engine</span>
+                        </div>
+                        <p class="text-xs text-dfMuted font-light">
+                            Architect and optimize our low-latency Kafka and Flink streaming worker nodes. Experience with async Rust, tokio, and distributed consensus protocols required.
+                        </p>
+                    </div>
+                    <a href="index.html#contact" class="px-5 py-2.5 bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary rounded-xl text-xs font-mono text-white text-center transition-all whitespace-nowrap">
+                        Apply via Inquiry
+                    </a>
+                </div>
+
+                <!-- Role 2 -->
+                <div class="glass-card rounded-2xl p-6 sm:p-8 border border-dfBorder flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3">
+                            <span class="font-display font-bold text-white text-lg">AI Agent & LLM Infrastructure Engineer</span>
+                            <span class="text-[10px] font-mono bg-dfSecondary/10 text-dfSecondary px-2.5 py-0.5 rounded">AI Control Plane</span>
+                        </div>
+                        <p class="text-xs text-dfMuted font-light">
+                            Build autonomous neural agent loops responsible for real-time schema sanitization, anomaly quarantine, and automated incident remediation.
+                        </p>
+                    </div>
+                    <a href="index.html#contact" class="px-5 py-2.5 bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary rounded-xl text-xs font-mono text-white text-center transition-all whitespace-nowrap">
+                        Apply via Inquiry
+                    </a>
+                </div>
+
+                <!-- Role 3 -->
+                <div class="glass-card rounded-2xl p-6 sm:p-8 border border-dfBorder flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3">
+                            <span class="font-display font-bold text-white text-lg">Staff Cloud Infrastructure & Kubernetes Architect</span>
+                            <span class="text-[10px] font-mono bg-dfAccent/10 text-dfAccent px-2.5 py-0.5 rounded">Multi-Cloud</span>
+                        </div>
+                        <p class="text-xs text-dfMuted font-light">
+                            Manage 128+ multi-region AWS, GCP, and Azure clusters. Ensure SOC2 Type II compliance, secure VPC isolation, and automated failover pipelines.
+                        </p>
+                    </div>
+                    <a href="index.html#contact" class="px-5 py-2.5 bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary rounded-xl text-xs font-mono text-white text-center transition-all whitespace-nowrap">
+                        Apply via Inquiry
+                    </a>
+                </div>
+
+            </div>
         </div>
 
         <!-- CTA Callout -->
         <div class="glass-card rounded-3xl p-12 text-center relative overflow-hidden border border-dfBorder space-y-6 max-w-4xl mx-auto">
             <div class="absolute inset-0 bg-gradient-to-r from-dfPrimary/10 via-dfSecondary/10 to-dfAccent/15 opacity-50"></div>
             <div class="relative z-10 space-y-4">
-                <h2 class="font-display text-3xl font-bold text-white">Review Your Architecture With Our Systems Leads</h2>
-                <p class="text-dfMuted text-sm font-light max-w-xl mx-auto">Bring your throughput numbers and SLA requirements. We will map out a custom streaming topology for your team.</p>
+                <h2 class="font-display text-3xl font-bold text-white">Don't See Your Exact Role?</h2>
+                <p class="text-dfMuted text-sm font-light max-w-xl mx-auto">If you are an exceptional systems engineer or data architect who loves hard problems, reach out directly to our engineering leads.</p>
                 <div class="pt-2">
                     <a href="index.html#contact" class="px-8 py-4 bg-dfPrimary text-dfBg font-bold rounded-xl text-xs hover:bg-dfHighlight transition-all shadow-lg shadow-dfPrimary/20 inline-flex items-center gap-2">
-                        <span>Schedule Technical Architecture Call</span>
+                        <span>Send Open Application</span>
                         <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
                 </div>
@@ -300,10 +289,10 @@
     <!-- Footer -->
     <footer class="bg-dfSecondaryBg border-t border-dfBorder py-12">
         <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-dfMuted">
-            <div>&copy; 2026 DataForge Labs, Inc. Case Studies & Architecture. All rights reserved.</div>
+            <div>&copy; 2026 DataForge Labs, Inc. Careers & Culture. All rights reserved.</div>
             <div class="flex items-center gap-6 mt-4 sm:mt-0">
                 <a href="index.html" class="hover:text-white transition-colors">Home</a>
-                <a href="customers.html" class="text-white transition-colors">Case Studies</a>
+                <a href="careers.html" class="text-white transition-colors">Careers</a>
                 <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
             </div>
         </div>
@@ -323,3 +312,4 @@
     </script>
 </body>
 </html>
+
