@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataForge Labs | Building the Future of Intelligent Data Infrastructure</title>
+    <title>DataForge Labs | Autonomous Enterprise Data & AI Infrastructure</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -32,22 +32,22 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif'],
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'aurora': 'aurora 15s ease infinite alternate',
+                        mono: ['Fira Code', 'monospace'],
                     },
                     keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        },
                         aurora: {
                             '0%': { backgroundPosition: '0% 50%' },
                             '50%': { backgroundPosition: '100% 50%' },
                             '100%': { backgroundPosition: '0% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
                         }
+                    },
+                    animation: {
+                        aurora: 'aurora 15s ease infinite alternate',
+                        float: 'float 6s ease-in-out infinite',
                     }
                 }
             }
@@ -58,7 +58,6 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
-        /* Custom Styling & Glassmorphism */
         body {
             background-color: #040816;
             color: #FFFFFF;
@@ -67,31 +66,31 @@
         }
 
         .glass-nav {
-            background: rgba(4, 8, 22, 0.75);
+            background: rgba(4, 8, 22, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .glass-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .glass-card:hover {
             border-color: rgba(0, 230, 118, 0.4);
-            box-shadow: 0 0 30px rgba(0, 230, 118, 0.15);
+            box-shadow: 0 0 35px rgba(0, 230, 118, 0.15);
             transform: translateY(-4px);
         }
 
         .aurora-bg {
             position: absolute;
-            width: 600px;
-            height: 600px;
-            filter: blur(120px);
+            width: 700px;
+            height: 700px;
+            filter: blur(160px);
             border-radius: 50%;
             z-index: -1;
             opacity: 0.35;
@@ -109,7 +108,6 @@
             border-radius: 3px;
         }
 
-        /* Gradient Text */
         .text-gradient {
             background: linear-gradient(135deg, #FFFFFF 30%, #B7C3D7 100%);
             -webkit-background-clip: text;
@@ -117,774 +115,409 @@
         }
 
         .text-glow {
-            background: linear-gradient(135deg, #00E676 0%, #00B8FF 50%, #7C4DFF 100%);
+            background: linear-gradient(135deg, #00E676 0%, #00FFD1 50%, #00B8FF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Grid overlay */
         .grid-overlay {
             background-size: 40px 40px;
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
                               linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-        }
-
-        /* Pulsing Status Dot */
-        @keyframes livePulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 230, 118, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
-        }
-        .live-dot {
-            animation: livePulse 2s infinite;
         }
     </style>
 </head>
 <body class="custom-scrollbar grid-overlay">
 
     <!-- Scroll Progress Indicator -->
-    <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-dfPrimary via-dfSecondary to-dfAccent z-50 w-0 transition-all duration-75"></div>
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-dfPrimary via-dfHighlight to-dfSecondary z-50 w-0 transition-all duration-75"></div>
 
-    <!-- Floating Glass Navigation -->
-    <header class="fixed top-0 left-0 right-0 z-40 glass-nav transition-all duration-300">
+    <!-- Floating Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-nav">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-dfPrimary to-dfSecondary p-[1px] flex items-center justify-center transition-transform group-hover:scale-105">
-                    <div class="w-full h-full bg-dfBg rounded-xl flex items-center justify-center">
-                        <i data-lucide="cpu" class="w-5 h-5 text-dfPrimary group-hover:text-dfHighlight transition-colors"></i>
+            
+            <!-- Modern Geometric Vector Logo (Inspired by Stripe/Plaid/Notion) -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-dfPrimary via-dfHighlight to-dfSecondary p-[1px] flex items-center justify-center transition-transform group-hover:scale-105 shadow-lg shadow-dfPrimary/20">
+                    <div class="w-full h-full bg-dfBg rounded-xl flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-dfPrimary/20 to-transparent"></div>
+                        <i data-lucide="shield-check" class="w-5 h-5 text-dfPrimary group-hover:text-dfHighlight transition-colors relative z-10"></i>
                     </div>
                 </div>
                 <div class="flex flex-col">
                     <span class="font-display font-bold text-xl tracking-wide text-white">DataForge <span class="text-dfPrimary">Labs</span></span>
-                    <span class="text-[10px] tracking-widest text-dfMuted uppercase font-medium">Enterprise AI Infrastructure</span>
+                    <span class="text-[9px] tracking-widest text-dfMuted uppercase font-mono font-semibold">Autonomous Infrastructure</span>
                 </div>
             </a>
 
             <!-- Desktop Nav Links -->
-            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-dfMuted">
-                <a href="#products" class="hover:text-white transition-colors">Products</a>
-                <a href="#architecture" class="hover:text-white transition-colors">Solutions</a>
-                <a href="#technology" class="hover:text-white transition-colors">Technology</a>
-                <a href="#ai-platform" class="hover:text-white transition-colors">AI Agents</a>
-                <a href="#company" class="hover:text-white transition-colors">Company</a>
-                <a href="#resources" class="hover:text-white transition-colors">Resources</a>
+            <nav class="hidden xl:flex items-center gap-7 text-sm font-medium text-dfMuted">
+                <a href="index.html" class="text-white font-semibold transition-colors">Home</a>
+                <a href="solutions.html" class="hover:text-white transition-colors">Solutions</a>
+                <a href="pipelines.html" class="hover:text-white transition-colors">Pipeline Studio</a>
+                <a href="agents.html" class="hover:text-white transition-colors">AI Agents</a>
+                <a href="pricing.html" class="hover:text-white transition-colors">Pricing</a>
+                <a href="docs.html" class="hover:text-white transition-colors">Docs</a>
+                <a href="status.html" class="hover:text-white transition-colors">Status</a>
             </nav>
 
-            <!-- CTA Actions -->
-            <div class="hidden md:flex items-center gap-4">
-                <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-dfSecondaryBg border border-dfBorder text-xs text-dfMuted">
-                    <span class="w-2 h-2 rounded-full bg-dfPrimary live-dot"></span>
-                    <span>AI Status: <strong class="text-white">Optimal</strong></span>
-                </div>
-                <a href="#contact" class="relative group overflow-hidden rounded-xl p-[1px] font-semibold text-sm">
-                    <span class="absolute inset-0 bg-gradient-to-r from-dfPrimary via-dfSecondary to-dfAccent animate-aurora"></span>
-                    <span class="relative px-5 py-2.5 bg-dfBg rounded-[11px] flex items-center gap-2 text-white group-hover:bg-opacity-80 transition-all">
-                        <span>Get Started</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-                    </span>
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-4">
+                <a href="login.html" class="hidden sm:inline-flex text-xs font-mono font-medium text-dfMuted hover:text-white transition-colors px-3 py-2">
+                    Sign In
                 </a>
-            </div>
-
-            <!-- Mobile Menu Toggle -->
-            <button id="mobile-menu-btn" class="lg:hidden p-2 text-dfMuted hover:text-white">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Navigation Drawer -->
-        <div id="mobile-menu" class="hidden lg:hidden glass-nav border-t border-dfBorder px-6 py-6 space-y-4">
-            <a href="#products" class="block text-dfMuted hover:text-white font-medium py-1">Products</a>
-            <a href="#architecture" class="block text-dfMuted hover:text-white font-medium py-1">Solutions</a>
-            <a href="#technology" class="block text-dfMuted hover:text-white font-medium py-1">Technology</a>
-            <a href="#ai-platform" class="block text-dfMuted hover:text-white font-medium py-1">AI Agents</a>
-            <a href="#company" class="block text-dfMuted hover:text-white font-medium py-1">Company</a>
-            <a href="#resources" class="block text-dfMuted hover:text-white font-medium py-1">Resources</a>
-            <div class="pt-4 border-t border-dfBorder flex flex-col gap-3">
-                <a href="#contact" class="w-full py-3 bg-gradient-to-r from-dfPrimary to-dfSecondary text-dfBg font-bold rounded-xl text-center">Get Started</a>
+                <a href="register.html" class="px-5 py-2.5 bg-gradient-to-r from-dfPrimary to-dfHighlight text-dfBg font-bold rounded-xl text-xs hover:opacity-95 transition-all shadow-lg shadow-dfPrimary/20 flex items-center gap-2">
+                    <span>Provision Cluster</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
-        <!-- Background Aurora & Blobs -->
-        <div class="aurora-bg bg-dfPrimary top-10 left-10"></div>
-        <div class="aurora-bg bg-dfAccent bottom-10 right-10"></div>
+    <main class="pt-32 pb-24">
+        <section class="relative min-h-[85vh] flex items-center justify-center px-6 overflow-hidden">
+            <div class="aurora-bg bg-dfPrimary top-10 left-1/4"></div>
+            <div class="aurora-bg bg-dfSecondary bottom-10 right-1/4"></div>
 
-        <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <!-- Hero Content (Left) -->
-            <div class="lg:col-span-7 space-y-8 z-10">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-dfSecondaryBg border border-dfBorder text-xs font-medium text-dfHighlight shadow-lg">
-                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                    <span>Introducing DataForge v4.5 Enterprise Engine</span>
+            <div class="max-w-5xl mx-auto text-center space-y-8 z-10">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dfSecondaryBg border border-dfBorder text-xs font-mono text-dfPrimary shadow-xl">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-dfPrimary"></i>
+                    <span>DataForge Platform v4.5 • Multi-Region Data Streaming & AI Agents</span>
                 </div>
 
-                <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-none text-gradient">
-                    Building the Future of <span class="text-glow">Intelligent Data</span> Infrastructure
+                <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gradient leading-tight">
+                    Autonomous Data Infrastructure & <span class="text-glow">Real-Time Streaming Engine</span>
                 </h1>
 
-                <p class="text-lg sm:text-xl text-dfMuted max-w-2xl font-light leading-relaxed">
-                    Empowering enterprises with autonomous AI agents, ultra-low latency real-time streaming pipelines, and bulletproof data governance at unprecedented scale.
+                <p class="text-lg sm:text-xl text-dfMuted max-w-3xl mx-auto font-light leading-relaxed">
+                    Powering tier-1 financial institutions, payment processors, and global enterprises with sub-millisecond pipeline orchestration, automated schema sanitization, and autonomous AI remediation.
                 </p>
 
-                <div class="flex flex-wrap items-center gap-4 pt-2">
-                    <a href="#products" class="px-8 py-4 bg-dfPrimary text-dfBg font-bold rounded-xl hover:bg-dfHighlight transition-all shadow-lg shadow-dfPrimary/20 flex items-center gap-3">
-                        <span>Explore Products</span>
-                        <i data-lucide="compass" class="w-5 h-5"></i>
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+                    <a href="register.html" class="px-8 py-4 bg-dfPrimary text-dfBg font-bold rounded-xl hover:bg-dfHighlight transition-all shadow-lg shadow-dfPrimary/25 flex items-center gap-3">
+                        <span>Deploy Enterprise Cluster</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </a>
-                    <a href="#contact" class="px-8 py-4 glass-card font-semibold rounded-xl hover:bg-white/10 transition-all flex items-center gap-3 text-white border border-dfBorder">
-                        <span>Book a Demo</span>
-                        <i data-lucide="calendar" class="w-5 h-5 text-dfSecondary"></i>
+                    <a href="pipelines.html" class="px-8 py-4 glass-card font-semibold rounded-xl hover:bg-white/15 transition-all flex items-center gap-3 text-white border border-dfBorder">
+                        <i data-lucide="play-circle" class="w-5 h-5 text-dfPrimary"></i>
+                        <span>Explore Pipeline Studio</span>
                     </a>
                 </div>
 
-                <!-- Animated Statistics Bar -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-dfBorder">
-                    <div>
-                        <div class="font-display text-2xl lg:text-3xl font-bold text-white">10+</div>
-                        <div class="text-xs text-dfMuted uppercase tracking-wider mt-1">Enterprise Products</div>
+                <!-- Metrics Ribbon -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-16 max-w-4xl mx-auto border-t border-dfBorder">
+                    <div class="p-4 glass-card rounded-2xl text-center">
+                        <div class="font-display text-3xl font-bold text-dfPrimary">&lt; 12ms</div>
+                        <div class="text-[11px] text-dfMuted font-mono uppercase mt-1">Global Pipeline Latency</div>
                     </div>
-                    <div>
-                        <div class="font-display text-2xl lg:text-3xl font-bold text-dfPrimary">500M+</div>
-                        <div class="text-xs text-dfMuted uppercase tracking-wider mt-1">Daily Events</div>
+                    <div class="p-4 glass-card rounded-2xl text-center">
+                        <div class="font-display text-3xl font-bold text-white">10B+</div>
+                        <div class="text-[11px] text-dfMuted font-mono uppercase mt-1">Daily Events Processed</div>
                     </div>
-                    <div>
-                        <div class="font-display text-2xl lg:text-3xl font-bold text-dfSecondary">99.99%</div>
-                        <div class="text-xs text-dfMuted uppercase tracking-wider mt-1">SLA Uptime</div>
+                    <div class="p-4 glass-card rounded-2xl text-center">
+                        <div class="font-display text-3xl font-bold text-dfHighlight">99.99%</div>
+                        <div class="text-[11px] text-dfMuted font-mono uppercase mt-1">Uptime SLA Guaranteed</div>
                     </div>
-                    <div>
-                        <div class="font-display text-2xl lg:text-3xl font-bold text-dfHighlight">120+</div>
-                        <div class="text-xs text-dfMuted uppercase tracking-wider mt-1">Autonomous AI</div>
+                    <div class="p-4 glass-card rounded-2xl text-center">
+                        <div class="font-display text-3xl font-bold text-dfSecondary">SOC2 Type II</div>
+                        <div class="text-[11px] text-dfMuted font-mono uppercase mt-1">Military-Grade Security</div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Futuristic Dashboard Mockup (Right) -->
-            <div class="lg:col-span-5 relative">
-                <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-dfPrimary via-dfSecondary to-dfAccent opacity-30 blur-xl animate-pulse-slow"></div>
+        <!-- Product Ecosystem Hub (Connecting All Pages) -->
+        <section class="py-24 max-w-7xl mx-auto px-6 space-y-16">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-dfPrimary px-3 py-1 rounded bg-dfPrimary/10 font-mono">Ecosystem Architecture</span>
+                <h2 class="font-display text-3xl sm:text-5xl font-bold text-white">Explore the DataForge Product Suite</h2>
+                <p class="text-dfMuted text-lg font-light">Direct access to our complete ecosystem of high-performance enterprise data and AI infrastructure pages.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <div class="relative glass-card rounded-2xl p-6 shadow-2xl overflow-hidden border border-dfBorder">
-                    <!-- Header Bar -->
-                    <div class="flex items-center justify-between pb-4 border-b border-dfBorder mb-6">
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
-                            <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
-                            <span class="w-3 h-3 rounded-full bg-dfPrimary/80 inline-block"></span>
-                            <span class="text-xs text-dfMuted ml-2 font-mono">cluster-us-east-ai.core</span>
-                        </div>
-                        <span class="text-xs font-mono text-dfHighlight px-2 py-0.5 rounded bg-dfHighlight/10">LIVE TELEMETRY</span>
+                <!-- 1. PesaGuard -->
+                <a href="pesaguard.html" class="glass-card rounded-3xl p-8 space-y-4 group block">
+                    <div class="w-12 h-12 rounded-xl bg-dfPrimary/10 text-dfPrimary flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
                     </div>
-
-                    <!-- Live Metrics Widget -->
-                    <div class="grid grid-cols-2 gap-4 mb-6">
-                        <div class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder">
-                            <div class="text-xs text-dfMuted">Ingestion Rate</div>
-                            <div class="text-2xl font-display font-bold text-white mt-1">2.4 TB<span class="text-dfPrimary text-sm">/sec</span></div>
-                            <div class="w-full bg-dfBorder h-1.5 rounded-full mt-3 overflow-hidden">
-                                <div class="bg-gradient-to-r from-dfPrimary to-dfSecondary h-full w-[85%]"></div>
-                            </div>
-                        </div>
-                        <div class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder">
-                            <div class="text-xs text-dfMuted">AI Agent Load</div>
-                            <div class="text-2xl font-display font-bold text-white mt-1">98.4<span class="text-dfSecondary text-sm">%</span></div>
-                            <div class="w-full bg-dfBorder h-1.5 rounded-full mt-3 overflow-hidden">
-                                <div class="bg-gradient-to-r from-dfSecondary to-dfAccent h-full w-[92%]"></div>
-                            </div>
-                        </div>
+                    <h3 class="font-display text-xl font-bold text-white group-hover:text-dfPrimary transition-colors">PesaGuard Financial Engine</h3>
+                    <p class="text-sm text-dfMuted font-light leading-relaxed">
+                        Sub-millisecond financial reconciliation and autonomous fraud prevention for tier-1 banks and payment gateways.
+                    </p>
+                    <div class="pt-2 text-xs font-mono text-dfPrimary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <span>Explore PesaGuard</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                     </div>
+                </a>
 
-                    <!-- Simulated Terminal Typing -->
-                    <div class="p-4 rounded-xl bg-[#02040A] border border-dfBorder font-mono text-xs space-y-2">
-                        <div class="text-dfMuted flex items-center gap-2">
-                            <span class="text-dfPrimary">❯</span> Starting AI Engine...
-                        </div>
-                        <div class="text-dfMuted flex items-center gap-2">
-                            <span class="text-dfSecondary">❯</span> Connecting Kafka Cluster... <span class="text-dfPrimary">[OK]</span>
-                        </div>
-                        <div class="text-dfMuted flex items-center gap-2">
-                            <span class="text-dfAccent">❯</span> Deploying Data Pipeline v4... <span class="text-dfPrimary">[ACTIVE]</span>
-                        </div>
-                        <div class="text-dfMuted flex items-center gap-2">
-                            <span class="text-dfHighlight">❯</span> Monitoring Infrastructure... <span class="text-dfPrimary">[SECURE]</span>
-                        </div>
-                        <div class="text-white flex items-center gap-2 pt-1 font-semibold">
-                            <span class="w-2 h-2 rounded-full bg-dfPrimary animate-ping"></span>
-                            System Healthy — All 120 AI Agents Operational
-                        </div>
+                <!-- 2. PipeForge -->
+                <a href="pipeforge.html" class="glass-card rounded-3xl p-8 space-y-4 group block">
+                    <div class="w-12 h-12 rounded-xl bg-dfSecondary/10 text-dfSecondary flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="git-merge" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white group-hover:text-dfSecondary transition-colors">PipeForge Zero-Latency ETL</h3>
+                    <p class="text-sm text-dfMuted font-light leading-relaxed">
+                        Apache Kafka, Flink, and Spark pipeline orchestration with automated schema evolution and instant backfills.
+                    </p>
+                    <div class="pt-2 text-xs font-mono text-dfSecondary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <span>Explore PipeForge</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </div>
+                </a>
+
+                <!-- 3. DataPure AI -->
+                <a href="datapure.html" class="glass-card rounded-3xl p-8 space-y-4 group block">
+                    <div class="w-12 h-12 rounded-xl bg-dfAccent/10 text-dfAccent flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="sparkles" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white group-hover:text-dfAccent transition-colors">DataPure AI Quality Suite</h3>
+                    <p class="text-sm text-dfMuted font-light leading-relaxed">
+                        Specialized LLM agents that continuously sanitize corrupted datasets, repair schema anomalies, and ensure data lake purity.
+                    </p>
+                    <div class="pt-2 text-xs font-mono text-dfAccent flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <span>Explore DataPure AI</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </div>
+                </a>
+
+                <!-- 4. ObserveFlow -->
+                <a href="observeflow.html" class="glass-card rounded-3xl p-8 space-y-4 group block">
+                    <div class="w-12 h-12 rounded-xl bg-dfHighlight/10 text-dfHighlight flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="activity" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white group-hover:text-dfHighlight transition-colors">ObserveFlow AI Observability</h3>
+                    <p class="text-sm text-dfMuted font-light leading-relaxed">
+                        Predictive pipeline observability that forecasts infrastructure bottlenecks and executes automated incident remediation.
+                    </p>
+                    <div class="pt-2 text-xs font-mono text-dfHighlight flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <span>Explore ObserveFlow</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </div>
+                </a>
+
+                <!-- 5. LineageFlow -->
+                <a href="lineageflow.html" class="glass-card rounded-3xl p-8 space-y-4 group block">
+                    <div class="w-12 h-12 rounded-xl bg-dfSecondary/10 text-dfSecondary flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="git-branch" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white group-hover:text-dfSecondary transition-colors">LineageFlow Enterprise Lineage</h3>
+                    <p class="text-sm text-dfMuted font-light leading-relaxed">
+                        Full-stack data dependency mapping from raw API ingestion points down to executive BI dashboards with impact analysis.
+                    </p>
+                    <div class="pt-2 text-xs font-mono text-dfSecondary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <span>Explore LineageFlow</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </div>
+                </a>
+
+                <!-- 6. CatalogIQ -->
+                <a href="catalogiq.html" class="glass-card rounded-3xl p-8 space-y-4 group block">
+                    <div class="w-12 h-12 rounded-xl bg-dfHighlight/10 text-dfHighlight flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="database" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white group-hover:text-dfHighlight transition-colors">CatalogIQ AI Data Catalog</h3>
+                    <p class="text-sm text-dfMuted font-light leading-relaxed">
+                        Semantic natural language search engine for petabyte-scale data lakes with automated metadata tagging and governance.
+                    </p>
+                    <div class="pt-2 text-xs font-mono text-dfHighlight flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <span>Explore CatalogIQ</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </div>
+                </a>
+
+                <!-- 7. QueryMind AI -->
+                <a href="querymind.html" class="glass-card rounded-3xl p-8 space-y-4 group block">
+                    <div class="w-12 h-12 rounded-xl bg-dfAccent/10 text-dfAccent flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="message-square" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white group-hover:text-dfAccent transition-colors">QueryMind Conversational SQL</h3>
+                    <p class="text-sm text-dfMuted font-light leading-relaxed">
+                        Translates plain human language into optimized SQL queries for Snowflake and BigQuery in milliseconds.
+                    </p>
+                    <div class="pt-2 text-xs font-mono text-dfAccent flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <span>Explore QueryMind</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </div>
+                </a>
+
+                <!-- 8. Pipeline Studio -->
+                <a href="pipelines.html" class="glass-card rounded-3xl p-8 space-y-4 group block">
+                    <div class="w-12 h-12 rounded-xl bg-dfPrimary/10 text-dfPrimary flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="layout" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white group-hover:text-dfPrimary transition-colors">Pipeline Studio & DAGs</h3>
+                    <p class="text-sm text-dfMuted font-light leading-relaxed">
+                        Visual DAG workflow orchestrator for building, testing, and deploying real-time streaming pipelines.
+                    </p>
+                    <div class="pt-2 text-xs font-mono text-dfPrimary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <span>Open Studio</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </div>
+                </a>
+
+                <!-- 9. AI Agent Command Center -->
+                <a href="agents.html" class="glass-card rounded-3xl p-8 space-y-4 group block">
+                    <div class="w-12 h-12 rounded-xl bg-dfSecondary/10 text-dfSecondary flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="cpu" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white group-hover:text-dfSecondary transition-colors">AI Agent Command Center</h3>
+                    <p class="text-sm text-dfMuted font-light leading-relaxed">
+                        Monitor, sync, and deploy autonomous neural agents responsible for cluster health and schema optimization.
+                    </p>
+                    <div class="pt-2 text-xs font-mono text-dfSecondary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <span>Open Command Center</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Company & Resources Quick Nav Section -->
+        <section class="py-16 max-w-7xl mx-auto px-6">
+            <div class="glass-card rounded-3xl p-8 lg:p-12 border border-dfBorder space-y-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-dfBorder">
+                    <div>
+                        <div class="text-xs font-mono text-dfPrimary uppercase tracking-widest">Platform & Resources</div>
+                        <h2 class="font-display text-2xl font-bold text-white mt-1">Enterprise Portals & Documentation</h2>
                     </div>
                 </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-xs font-mono">
+                    <a href="about.html" class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary text-center transition-all block text-dfMuted hover:text-white">
+                        <i data-lucide="users" class="w-5 h-5 mx-auto mb-2 text-dfPrimary"></i> About Us
+                    </a>
+                    <a href="careers.html" class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary text-center transition-all block text-dfMuted hover:text-white">
+                        <i data-lucide="briefcase" class="w-5 h-5 mx-auto mb-2 text-dfSecondary"></i> Careers
+                    </a>
+                    <a href="solutions.html" class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary text-center transition-all block text-dfMuted hover:text-white">
+                        <i data-lucide="layers" class="w-5 h-5 mx-auto mb-2 text-dfAccent"></i> Solutions
+                    </a>
+                    <a href="customers.html" class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary text-center transition-all block text-dfMuted hover:text-white">
+                        <i data-lucide="award" class="w-5 h-5 mx-auto mb-2 text-dfHighlight"></i> Case Studies
+                    </a>
+                    <a href="pricing.html" class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary text-center transition-all block text-dfMuted hover:text-white">
+                        <i data-lucide="dollar-sign" class="w-5 h-5 mx-auto mb-2 text-dfPrimary"></i> Pricing
+                    </a>
+                    <a href="docs.html" class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary text-center transition-all block text-dfMuted hover:text-white">
+                        <i data-lucide="book-open" class="w-5 h-5 mx-auto mb-2 text-dfSecondary"></i> Docs & APIs
+                    </a>
+                    <a href="status.html" class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary text-center transition-all block text-dfMuted hover:text-white">
+                        <i data-lucide="activity" class="w-5 h-5 mx-auto mb-2 text-dfPrimary"></i> System Status
+                    </a>
+                    <a href="security.html" class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary text-center transition-all block text-dfMuted hover:text-white">
+                        <i data-lucide="shield" class="w-5 h-5 mx-auto mb-2 text-dfHighlight"></i> Security Center
+                    </a>
+                    <a href="network.html" class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary text-center transition-all block text-dfMuted hover:text-white">
+                        <i data-lucide="globe" class="w-5 h-5 mx-auto mb-2 text-dfSecondary"></i> Global Map
+                    </a>
+                    <a href="login.html" class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary text-center transition-all block text-dfMuted hover:text-white">
+                        <i data-lucide="log-in" class="w-5 h-5 mx-auto mb-2 text-dfAccent"></i> SSO Login
+                    </a>
+                    <a href="privacy.html" class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary text-center transition-all block text-dfMuted hover:text-white">
+                        <i data-lucide="lock" class="w-5 h-5 mx-auto mb-2 text-dfHighlight"></i> Privacy Policy
+                    </a>
+                    <a href="terms.html" class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary text-center transition-all block text-dfMuted hover:text-white">
+                        <i data-lucide="file-text" class="w-5 h-5 mx-auto mb-2 text-dfPrimary"></i> Terms of Service
+                    </a>
+                </div>
             </div>
+        </section>
 
-        </div>
-    </section>
-
-    <hr class="border-dfBorder max-w-7xl mx-auto">
-
-    <!-- Products Section -->
-    <section id="products" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <span class="text-xs font-bold uppercase tracking-widest text-dfPrimary px-3 py-1 rounded bg-dfPrimary/10">Enterprise Ecosystem</span>
-                <h2 class="font-display text-3xl sm:text-5xl font-bold text-white">Intelligent Data Products</h2>
-                <p class="text-dfMuted text-lg font-light">A unified suite engineered for ultra-scale data processing, live streaming, compliance, and autonomous AI analytics.</p>
-            </div>
-
-            <!-- Products Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Interactive Contact Section -->
+        <section id="contact" class="py-24 max-w-5xl mx-auto px-6">
+            <div class="glass-card rounded-3xl p-8 lg:p-12 border border-dfBorder relative overflow-hidden space-y-8">
+                <div class="aurora-bg bg-dfPrimary top-0 right-0 opacity-20"></div>
                 
-                <!-- Product Card 1 -->
-                <div class="glass-card rounded-2xl p-8 flex flex-col justify-between group relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-dfPrimary/10 rounded-full blur-2xl group-hover:bg-dfPrimary/20 transition-all"></div>
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-dfPrimary/20 to-dfSecondary/20 border border-dfBorder flex items-center justify-center mb-6 text-dfPrimary group-hover:scale-110 transition-transform">
-                            <i data-lucide="shield-check" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-white mb-2">PesaGuard</h3>
-                        <p class="text-sm text-dfMuted mb-6 font-light">Financial reconciliation platform designed for high-frequency transactions with automated anomaly detection.</p>
-                    </div>
-                    <div class="space-y-4 pt-4 border-t border-dfBorder">
-                        <div class="flex items-center gap-2 text-xs font-mono text-dfHighlight">
-                            <span>Stack: Apache Flink, Kafka, Python</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-dfMuted">Live Status: <strong class="text-dfPrimary">99.99%</strong></span>
-                            <a href="#contact" class="text-xs font-semibold text-white group-hover:text-dfPrimary flex items-center gap-1 transition-colors">
-                                Learn More <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
+                <div class="space-y-3 text-center max-w-2xl mx-auto">
+                    <span class="text-xs font-mono text-dfPrimary uppercase tracking-widest">Get Started Today</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white">Schedule an Enterprise Architecture Walkthrough</h2>
+                    <p class="text-dfMuted text-sm font-light">
+                        Speak with our distributed systems and AI infrastructure specialists to design your custom data pipeline cluster.
+                    </p>
                 </div>
 
-                <!-- Product Card 2 -->
-                <div class="glass-card rounded-2xl p-8 flex flex-col justify-between group relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-dfSecondary/10 rounded-full blur-2xl group-hover:bg-dfSecondary/20 transition-all"></div>
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-dfSecondary/20 to-dfAccent/20 border border-dfBorder flex items-center justify-center mb-6 text-dfSecondary group-hover:scale-110 transition-transform">
-                            <i data-lucide="git-merge" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-white mb-2">PipeForge</h3>
-                        <p class="text-sm text-dfMuted mb-6 font-light">Zero-latency data pipeline platform for automated ETL execution, schema evolution, and backfills.</p>
-                    </div>
-                    <div class="space-y-4 pt-4 border-t border-dfBorder">
-                        <div class="flex items-center gap-2 text-xs font-mono text-dfHighlight">
-                            <span>Stack: Spark, Airflow, Rust</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-dfMuted">Live Status: <strong class="text-dfPrimary">Active</strong></span>
-                            <a href="#contact" class="text-xs font-semibold text-white group-hover:text-dfSecondary flex items-center gap-1 transition-colors">
-                                Learn More <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Card 3 -->
-                <div class="glass-card rounded-2xl p-8 flex flex-col justify-between group relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-dfAccent/10 rounded-full blur-2xl group-hover:bg-dfAccent/20 transition-all"></div>
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-dfAccent/20 to-dfHighlight/20 border border-dfBorder flex items-center justify-center mb-6 text-dfHighlight group-hover:scale-110 transition-transform">
-                            <i data-lucide="cpu" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-white mb-2">DataPure AI</h3>
-                        <p class="text-sm text-dfMuted mb-6 font-light">AI-driven data quality platform ensuring continuous sanitization, schema integrity, and automated cleansing.</p>
-                    </div>
-                    <div class="space-y-4 pt-4 border-t border-dfBorder">
-                        <div class="flex items-center gap-2 text-xs font-mono text-dfHighlight">
-                            <span>Stack: LLM Agents, PyTorch</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-dfMuted">Live Status: <strong class="text-dfPrimary">Optimal</strong></span>
-                            <a href="#contact" class="text-xs font-semibold text-white group-hover:text-dfHighlight flex items-center gap-1 transition-colors">
-                                Learn More <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Card 4 -->
-                <div class="glass-card rounded-2xl p-8 flex flex-col justify-between group relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-dfPrimary/10 rounded-full blur-2xl group-hover:bg-dfPrimary/20 transition-all"></div>
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-dfPrimary/20 to-dfSecondary/20 border border-dfBorder flex items-center justify-center mb-6 text-dfPrimary group-hover:scale-110 transition-transform">
-                            <i data-lucide="activity" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-white mb-2">ObserveFlow AI</h3>
-                        <p class="text-sm text-dfMuted mb-6 font-light">Comprehensive pipeline observability and predictive incident mitigation powered by telemetry AI models.</p>
-                    </div>
-                    <div class="space-y-4 pt-4 border-t border-dfBorder">
-                        <div class="flex items-center gap-2 text-xs font-mono text-dfHighlight">
-                            <span>Stack: Prometheus, Grafana, Go</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-dfMuted">Live Status: <strong class="text-dfPrimary">99.99%</strong></span>
-                            <a href="#contact" class="text-xs font-semibold text-white group-hover:text-dfPrimary flex items-center gap-1 transition-colors">
-                                Learn More <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Card 5 -->
-                <div class="glass-card rounded-2xl p-8 flex flex-col justify-between group relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-dfSecondary/10 rounded-full blur-2xl group-hover:bg-dfSecondary/20 transition-all"></div>
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-dfSecondary/20 to-dfAccent/20 border border-dfBorder flex items-center justify-center mb-6 text-dfSecondary group-hover:scale-110 transition-transform">
-                            <i data-lucide="git-branch" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-white mb-2">LineageFlow</h3>
-                        <p class="text-sm text-dfMuted mb-6 font-light">Enterprise data lineage mapper providing full-stack visibility from raw ingestion sources to BI dashboards.</p>
-                    </div>
-                    <div class="space-y-4 pt-4 border-t border-dfBorder">
-                        <div class="flex items-center gap-2 text-xs font-mono text-dfHighlight">
-                            <span>Stack: Neo4j, GraphQL, React</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-dfMuted">Live Status: <strong class="text-dfPrimary">Active</strong></span>
-                            <a href="#contact" class="text-xs font-semibold text-white group-hover:text-dfSecondary flex items-center gap-1 transition-colors">
-                                Learn More <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Card 6 -->
-                <div class="glass-card rounded-2xl p-8 flex flex-col justify-between group relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-dfAccent/10 rounded-full blur-2xl group-hover:bg-dfAccent/20 transition-all"></div>
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-dfAccent/20 to-dfHighlight/20 border border-dfBorder flex items-center justify-center mb-6 text-dfHighlight group-hover:scale-110 transition-transform">
-                            <i data-lucide="database" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-white mb-2">CatalogIQ</h3>
-                        <p class="text-sm text-dfMuted mb-6 font-light">AI-powered data catalog with automated tagging, semantic search, and governance policy enforcement.</p>
-                    </div>
-                    <div class="space-y-4 pt-4 border-t border-dfBorder">
-                        <div class="flex items-center gap-2 text-xs font-mono text-dfHighlight">
-                            <span>Stack: Vector DB, OpenAI, FastAPI</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-dfMuted">Live Status: <strong class="text-dfPrimary">Optimal</strong></span>
-                            <a href="#contact" class="text-xs font-semibold text-white group-hover:text-dfHighlight flex items-center gap-1 transition-colors">
-                                Learn More <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Architecture Section -->
-    <section id="architecture" class="py-24 bg-dfSecondaryBg relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <span class="text-xs font-bold uppercase tracking-widest text-dfSecondary px-3 py-1 rounded bg-dfSecondary/10">Architecture Flow</span>
-                <h2 class="font-display text-3xl sm:text-5xl font-bold text-white">How DataForge Powers Enterprises</h2>
-                <p class="text-dfMuted text-lg font-light">Seamless end-to-end data pipeline orchestration from multi-source ingestion to instant AI-driven executive decisions.</p>
-            </div>
-
-            <!-- Architecture Flow Visualization -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-8 gap-4 items-center">
-                
-                <div class="glass-card rounded-xl p-6 text-center group hover:border-dfPrimary transition-all">
-                    <i data-lucide="users" class="w-8 h-8 text-dfPrimary mx-auto mb-3"></i>
-                    <h4 class="font-bold text-white text-sm">1. Users & Apps</h4>
-                    <p class="text-xs text-dfMuted mt-1">Global Traffic</p>
-                </div>
-
-                <div class="hidden lg:flex justify-center text-dfPrimary animate-pulse">
-                    <i data-lucide="arrow-right" class="w-6 h-6"></i>
-                </div>
-
-                <div class="glass-card rounded-xl p-6 text-center group hover:border-dfSecondary transition-all">
-                    <i data-lucide="server" class="w-8 h-8 text-dfSecondary mx-auto mb-3"></i>
-                    <h4 class="font-bold text-white text-sm">2. Enterprise APIs</h4>
-                    <p class="text-xs text-dfMuted mt-1">REST / GraphQL</p>
-                </div>
-
-                <div class="hidden lg:flex justify-center text-dfSecondary animate-pulse">
-                    <i data-lucide="arrow-right" class="w-6 h-6"></i>
-                </div>
-
-                <div class="glass-card rounded-xl p-6 text-center group hover:border-dfAccent transition-all">
-                    <i data-lucide="layers" class="w-8 h-8 text-dfAccent mx-auto mb-3"></i>
-                    <h4 class="font-bold text-white text-sm">3. Kafka Streams</h4>
-                    <p class="text-xs text-dfMuted mt-1">Real-Time Ingestion</p>
-                </div>
-
-                <div class="hidden lg:flex justify-center text-dfAccent animate-pulse">
-                    <i data-lucide="arrow-right" class="w-6 h-6"></i>
-                </div>
-
-                <div class="glass-card rounded-xl p-6 text-center group hover:border-dfHighlight transition-all">
-                    <i data-lucide="cpu" class="w-8 h-8 text-dfHighlight mx-auto mb-3"></i>
-                    <h4 class="font-bold text-white text-sm">4. AI Core & Storage</h4>
-                    <p class="text-xs text-dfMuted mt-1">Spark & Snowflake</p>
-                </div>
-
-                <div class="hidden lg:flex justify-center text-dfHighlight animate-pulse">
-                    <i data-lucide="arrow-right" class="w-6 h-6"></i>
-                </div>
-
-            </div>
-
-            <div class="mt-12 text-center">
-                <div class="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-dfBg border border-dfBorder text-sm text-dfMuted">
-                    <span class="w-2.5 h-2.5 rounded-full bg-dfPrimary"></span>
-                    <span>Total latency across pipeline nodes: <strong class="text-white font-mono">&lt; 14ms</strong></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technology Stack Section -->
-    <section id="technology" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <span class="text-xs font-bold uppercase tracking-widest text-dfHighlight px-3 py-1 rounded bg-dfHighlight/10">Modern Stack</span>
-                <h2 class="font-display text-3xl sm:text-5xl font-bold text-white">Built on World-Class Technologies</h2>
-                <p class="text-dfMuted text-lg font-light">Integrated natively with industry-leading cloud providers, distributed engines, and DevOps frameworks.</p>
-            </div>
-
-            <!-- Tech Grid -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                
-                <div class="glass-card rounded-xl p-6 text-center group hover:bg-white/5 transition-all">
-                    <i data-lucide="code" class="w-8 h-8 text-dfPrimary mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
-                    <div class="font-semibold text-white text-sm">Python</div>
-                    <div class="text-[10px] text-dfMuted mt-1">Core Engine</div>
-                </div>
-
-                <div class="glass-card rounded-xl p-6 text-center group hover:bg-white/5 transition-all">
-                    <i data-lucide="hard-drive" class="w-8 h-8 text-dfSecondary mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
-                    <div class="font-semibold text-white text-sm">Apache Kafka</div>
-                    <div class="text-[10px] text-dfMuted mt-1">Streaming</div>
-                </div>
-
-                <div class="glass-card rounded-xl p-6 text-center group hover:bg-white/5 transition-all">
-                    <i data-lucide="zap" class="w-8 h-8 text-dfAccent mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
-                    <div class="font-semibold text-white text-sm">Apache Spark</div>
-                    <div class="text-[10px] text-dfMuted mt-1">Processing</div>
-                </div>
-
-                <div class="glass-card rounded-xl p-6 text-center group hover:bg-white/5 transition-all">
-                    <i data-lucide="cloud" class="w-8 h-8 text-dfHighlight mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
-                    <div class="font-semibold text-white text-sm">Kubernetes</div>
-                    <div class="text-[10px] text-dfMuted mt-1">Orchestration</div>
-                </div>
-
-                <div class="glass-card rounded-xl p-6 text-center group hover:bg-white/5 transition-all">
-                    <i data-lucide="database" class="w-8 h-8 text-dfPrimary mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
-                    <div class="font-semibold text-white text-sm">Snowflake</div>
-                    <div class="text-[10px] text-dfMuted mt-1">Cloud DW</div>
-                </div>
-
-                <div class="glass-card rounded-xl p-6 text-center group hover:bg-white/5 transition-all">
-                    <i data-lucide="terminal" class="w-8 h-8 text-dfSecondary mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
-                    <div class="font-semibold text-white text-sm">Terraform</div>
-                    <div class="text-[10px] text-dfMuted mt-1">Infrastructure</div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- AI Platform Section -->
-    <section id="ai-platform" class="py-24 bg-dfSecondaryBg relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
-                <div class="lg:col-span-6 space-y-6">
-                    <span class="text-xs font-bold uppercase tracking-widest text-dfPrimary px-3 py-1 rounded bg-dfPrimary/10">Autonomous Intelligence</span>
-                    <h2 class="font-display text-3xl sm:text-5xl font-bold text-white">120+ Specialized AI Agents Working 24/7</h2>
-                    <p class="text-dfMuted text-lg font-light">DataForge Labs embeds autonomous multi-agent networks directly into your enterprise data fabric to predict failures, self-optimize queries, and remediate pipeline drift instantly.</p>
-                    
-                    <ul class="space-y-4 pt-2">
-                        <li class="flex items-start gap-3">
-                            <i data-lucide="check-circle" class="w-6 h-6 text-dfPrimary flex-shrink-0 mt-0.5"></i>
-                            <div>
-                                <strong class="text-white">Predictive Root Cause Analysis:</strong> Automatically identifies and isolates data degradation incidents before downstream impact.
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i data-lucide="check-circle" class="w-6 h-6 text-dfSecondary flex-shrink-0 mt-0.5"></i>
-                            <div>
-                                <strong class="text-white">Conversational SQL Analytics:</strong> Query petabyte-scale warehouses in plain human language with sub-second response times.
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i data-lucide="check-circle" class="w-6 h-6 text-dfAccent flex-shrink-0 mt-0.5"></i>
-                            <div>
-                                <strong class="text-white">Autonomous Pipeline Tuning:</strong> Self-adjusting Spark clusters and storage partitions based on live workload profiling.
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="lg:col-span-6">
-                    <div class="glass-card rounded-2xl p-8 border border-dfBorder space-y-6 relative">
-                        <div class="absolute -top-4 -right-4 px-4 py-1.5 rounded-full bg-dfPrimary text-dfBg font-bold text-xs shadow-lg">
-                            ACTIVE AGENT NETWORK
-                        </div>
-                        <div class="flex items-center justify-between pb-4 border-b border-dfBorder">
-                            <span class="text-sm font-mono text-dfMuted">Agent Cluster #09</span>
-                            <span class="text-xs text-dfHighlight font-mono">Status: LEARNING</span>
-                        </div>
-                        <div class="space-y-4 font-mono text-xs">
-                            <div class="p-3 rounded-lg bg-dfBg border border-dfBorder flex items-center justify-between">
-                                <span class="text-dfPrimary">[Agent-Guard-1]:</span>
-                                <span class="text-dfMuted">Anomaly detected in Schema v2. Auto-patching...</span>
-                            </div>
-                            <div class="p-3 rounded-lg bg-dfBg border border-dfBorder flex items-center justify-between">
-                                <span class="text-dfSecondary">[Agent-Query-4]:</span>
-                                <span class="text-dfMuted">Optimized 4,120 slow SQL queries. Saved $14.2k cloud cost.</span>
-                            </div>
-                            <div class="p-3 rounded-lg bg-dfBg border border-dfBorder flex items-center justify-between">
-                                <span class="text-dfAccent">[Agent-Stream-9]:</span>
-                                <span class="text-dfMuted">Kafka throughput balanced. Zero packet loss verified.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Company Timeline & Stats -->
-    <section id="company" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <span class="text-xs font-bold uppercase tracking-widest text-dfSecondary px-3 py-1 rounded bg-dfSecondary/10">Global Scale</span>
-                <h2 class="font-display text-3xl sm:text-5xl font-bold text-white">Engineered for Global Enterprises</h2>
-                <p class="text-dfMuted text-lg font-light">Trusted by Fortune 500 financial institutions, healthcare providers, and high-growth technology unicorns worldwide.</p>
-            </div>
-
-            <!-- Big Stats Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-                <div class="glass-card rounded-2xl p-8 text-center">
-                    <div class="font-display text-4xl sm:text-5xl font-bold text-dfPrimary mb-2">50+</div>
-                    <div class="text-sm text-dfMuted uppercase tracking-wider">Enterprise Clients</div>
-                </div>
-                <div class="glass-card rounded-2xl p-8 text-center">
-                    <div class="font-display text-4xl sm:text-5xl font-bold text-dfSecondary mb-2">25+</div>
-                    <div class="text-sm text-dfMuted uppercase tracking-wider">Countries Worldwide</div>
-                </div>
-                <div class="glass-card rounded-2xl p-8 text-center">
-                    <div class="font-display text-4xl sm:text-5xl font-bold text-dfHighlight mb-2">99.99%</div>
-                    <div class="text-sm text-dfMuted uppercase tracking-wider">SLA Availability</div>
-                </div>
-            </div>
-
-            <!-- Company Timeline -->
-            <div class="glass-card rounded-2xl p-8 lg:p-12 border border-dfBorder">
-                <h3 class="font-display text-2xl font-bold text-white mb-8 text-center">Company Roadmap & Milestones</h3>
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
-                    <div class="space-y-2">
-                        <span class="text-xs font-mono text-dfPrimary">Q1 2026</span>
-                        <h4 class="font-bold text-white text-base">DataForge Founded</h4>
-                        <p class="text-xs text-dfMuted font-light">Initial seed round led by top-tier venture partners.</p>
-                    </div>
-                    <div class="space-y-2">
-                        <span class="text-xs font-mono text-dfSecondary">Q2 2026</span>
-                        <h4 class="font-bold text-white text-base">Launch PesaGuard</h4>
-                        <p class="text-xs text-dfMuted font-light">Financial reconciliation core deployed to tier-1 banks.</p>
-                    </div>
-                    <div class="space-y-2">
-                        <span class="text-xs font-mono text-dfAccent">Q3 2026</span>
-                        <h4 class="font-bold text-white text-base">Launch PipeForge</h4>
-                        <p class="text-xs text-dfMuted font-light">Next-gen zero-latency streaming platform release.</p>
-                    </div>
-                    <div class="space-y-2">
-                        <span class="text-xs font-mono text-dfHighlight">Q4 2026</span>
-                        <h4 class="font-bold text-white text-base">Launch AI Platform</h4>
-                        <p class="text-xs text-dfMuted font-light">Autonomous multi-agent orchestration engine rollout.</p>
-                    </div>
-                    <div class="space-y-2">
-                        <span class="text-xs font-mono text-white">2027 & Beyond</span>
-                        <h4 class="font-bold text-white text-base">Global Expansion</h4>
-                        <p class="text-xs text-dfMuted font-light">Expanding enterprise operations across EMEA and APAC.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Resources & Articles -->
-    <section id="resources" class="py-24 bg-dfSecondaryBg relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <span class="text-xs font-bold uppercase tracking-widest text-dfPrimary px-3 py-1 rounded bg-dfPrimary/10">Knowledge Center</span>
-                <h2 class="font-display text-3xl sm:text-5xl font-bold text-white">Latest Engineering Insights</h2>
-                <p class="text-dfMuted text-lg font-light">Deep dives into distributed systems architecture, streaming performance, and AI-driven governance.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between group cursor-pointer">
-                    <div>
-                        <div class="text-xs font-mono text-dfPrimary mb-3">Whitepaper • May 2026</div>
-                        <h3 class="font-display text-lg font-bold text-white mb-2 group-hover:text-dfPrimary transition-colors">Architecting Petabyte-Scale Streaming Pipelines with Zero Data Loss</h3>
-                        <p class="text-xs text-dfMuted font-light mb-6">An architectural blueprint for managing high-frequency enterprise Kafka clusters combined with Apache Flink.</p>
-                    </div>
-                    <div class="flex items-center gap-1 text-xs font-semibold text-white">
-                        <span>Read Whitepaper</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                </div>
-
-                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between group cursor-pointer">
-                    <div>
-                        <div class="text-xs font-mono text-dfSecondary mb-3">Engineering Blog • April 2026</div>
-                        <h3 class="font-display text-lg font-bold text-white mb-2 group-hover:text-dfSecondary transition-colors">How We Built Autonomous AI Agents for Real-Time Incident Remediation</h3>
-                        <p class="text-xs text-dfMuted font-light mb-6">Deep dive into our multi-agent model design and automated self-healing data governance mechanics.</p>
-                    </div>
-                    <div class="flex items-center gap-1 text-xs font-semibold text-white">
-                        <span>Read Article</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                </div>
-
-                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between group cursor-pointer">
-                    <div>
-                        <div class="text-xs font-mono text-dfAccent mb-3">Documentation • Release v4.5</div>
-                        <h3 class="font-display text-lg font-bold text-white mb-2 group-hover:text-dfAccent transition-colors">DataForge API & Developer Quickstart Guide</h3>
-                        <p class="text-xs text-dfMuted font-light mb-6">Comprehensive reference documentation for integrating DataForge SDKs into your enterprise stack.</p>
-                    </div>
-                    <div class="flex items-center gap-1 text-xs font-semibold text-white">
-                        <span>Explore Docs</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <div class="lg:col-span-6 space-y-6">
-                <span class="text-xs font-bold uppercase tracking-widest text-dfPrimary px-3 py-1 rounded bg-dfPrimary/10">Get In Touch</span>
-                <h2 class="font-display text-3xl sm:text-5xl font-bold text-white">Ready to Transform Your Enterprise Data Infrastructure?</h2>
-                <p class="text-dfMuted text-lg font-light">Speak with our enterprise architects to schedule a custom demonstration tailored to your infrastructure requirements.</p>
-                
-                <div class="space-y-4 pt-4">
-                    <div class="flex items-center gap-4 text-dfMuted">
-                        <div class="w-10 h-10 rounded-xl bg-dfSecondaryBorder flex items-center justify-center text-dfPrimary bg-dfSecondaryBg border border-dfBorder">
-                            <i data-lucide="mail" class="w-5 h-5"></i>
-                        </div>
-                        <span>enterprise@dataforgelabs.io</span>
-                    </div>
-                    <div class="flex items-center gap-4 text-dfMuted">
-                        <div class="w-10 h-10 rounded-xl bg-dfSecondaryBorder flex items-center justify-center text-dfSecondary bg-dfSecondaryBg border border-dfBorder">
-                            <i data-lucide="map-pin" class="w-5 h-5"></i>
-                        </div>
-                        <span>Silicon Valley HQ • 500 Howard St, San Francisco, CA</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lg:col-span-6">
-                <div class="glass-card rounded-2xl p-8 border border-dfBorder">
-                    <form onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent to DataForge Labs Enterprise Team.');" class="space-y-4">
+                <form onsubmit="event.preventDefault(); alert('Request submitted successfully! Our enterprise solutions team will contact you within 2 hours.');" class="space-y-4 max-w-2xl mx-auto">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-mono text-dfMuted mb-2">Full Name</label>
-                            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-dfBg border border-dfBorder text-white text-sm focus:outline-none focus:border-dfPrimary transition-colors" placeholder="Alex Vance">
+                            <input type="text" required placeholder="Alex Morgan" class="w-full px-4 py-3 rounded-xl bg-dfBg border border-dfBorder text-white text-sm focus:outline-none focus:border-dfPrimary transition-colors">
                         </div>
                         <div>
                             <label class="block text-xs font-mono text-dfMuted mb-2">Work Email</label>
-                            <input type="email" required class="w-full px-4 py-3 rounded-xl bg-dfBg border border-dfBorder text-white text-sm focus:outline-none focus:border-dfPrimary transition-colors" placeholder="alex@enterprise.com">
+                            <input type="email" required placeholder="alex@enterprise.com" class="w-full px-4 py-3 rounded-xl bg-dfBg border border-dfBorder text-white text-sm focus:outline-none focus:border-dfPrimary transition-colors">
                         </div>
-                        <div>
-                            <label class="block text-xs font-mono text-dfMuted mb-2">Company Name</label>
-                            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-dfBg border border-dfBorder text-white text-sm focus:outline-none focus:border-dfPrimary transition-colors" placeholder="Global Corp Inc.">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-mono text-dfMuted mb-2">Message / Infrastructure Requirements</label>
-                            <textarea rows="4" required class="w-full px-4 py-3 rounded-xl bg-dfBg border border-dfBorder text-white text-sm focus:outline-none focus:border-dfPrimary transition-colors" placeholder="Tell us about your data scale and requirements..."></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-dfPrimary to-dfSecondary text-dfBg font-bold rounded-xl hover:opacity-90 transition-all shadow-lg shadow-dfPrimary/20 flex items-center justify-center gap-2">
-                            <span>Submit Request</span>
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                        </button>
-                    </form>
-                </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono text-dfMuted mb-2">Select Primary Solution</label>
+                        <select class="w-full px-4 py-3 rounded-xl bg-dfBg border border-dfBorder text-white text-sm focus:outline-none focus:border-dfPrimary transition-colors">
+                            <option>PesaGuard (Financial Reconciliation)</option>
+                            <option>PipeForge (Zero-Latency Pipelines)</option>
+                            <option>DataPure AI (Data Quality & Sanitization)</option>
+                            <option>ObserveFlow AI (Observability & Incident Mitigation)</option>
+                            <option>CatalogIQ & QueryMind (Data Catalog & Analytics)</option>
+                            <option>Custom Multi-Region Cluster Enterprise Deployment</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono text-dfMuted mb-2">Project Scope & Requirements</label>
+                        <textarea rows="4" required placeholder="Tell us about your streaming volume, data warehouse sinks, and SLA requirements..." class="w-full px-4 py-3 rounded-xl bg-dfBg border border-dfBorder text-white text-sm focus:outline-none focus:border-dfPrimary transition-colors"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-dfPrimary text-dfBg font-bold rounded-xl text-xs hover:bg-dfHighlight transition-all shadow-lg shadow-dfPrimary/20 flex items-center justify-center gap-2">
+                        <span>Submit Architecture Inquiry</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </form>
             </div>
+        </section>
 
-        </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer class="bg-dfSecondaryBg border-t border-dfBorder py-16">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
-            
-            <div class="md:col-span-2 space-y-4">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 text-xs text-dfMuted">
+            <div class="space-y-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-dfPrimary to-dfSecondary p-[1px] flex items-center justify-center">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-dfPrimary to-dfHighlight p-[1px] flex items-center justify-center">
                         <div class="w-full h-full bg-dfBg rounded-lg flex items-center justify-center">
-                            <i data-lucide="cpu" class="w-4 h-4 text-dfPrimary"></i>
+                            <i data-lucide="shield-check" class="w-4 h-4 text-dfPrimary"></i>
                         </div>
                     </div>
-                    <span class="font-display font-bold text-lg text-white">DataForge <span class="text-dfPrimary">Labs</span></span>
+                    <span class="font-display font-bold text-lg text-white">DataForge Labs</span>
                 </div>
-                <p class="text-dfMuted text-sm font-light max-w-sm">
-                    Building the future of intelligent data infrastructure and autonomous enterprise AI systems.
-                </p>
-                <div class="flex items-center gap-4 pt-2 text-dfMuted">
-                    <a href="#" class="hover:text-white transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
-                    <a href="#" class="hover:text-white transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                    <a href="#" class="hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                </div>
+                <p class="font-light">Autonomous enterprise data streaming, real-time reconciliation, and multi-agent AI infrastructure.</p>
+                <div class="text-[10px] text-dfMuted font-mono">&copy; 2026 DataForge Labs, Inc. All rights reserved.</div>
             </div>
 
-            <div class="space-y-4">
-                <h4 class="font-bold text-white text-sm">Products</h4>
-                <ul class="space-y-2 text-sm text-dfMuted">
-                    <li><a href="#products" class="hover:text-white transition-colors">PesaGuard</a></li>
-                    <li><a href="#products" class="hover:text-white transition-colors">PipeForge</a></li>
-                    <li><a href="#products" class="hover:text-white transition-colors">DataPure AI</a></li>
-                    <li><a href="#products" class="hover:text-white transition-colors">ObserveFlow AI</a></li>
-                    <li><a href="#products" class="hover:text-white transition-colors">LineageFlow</a></li>
+            <div class="space-y-3 font-light">
+                <div class="font-bold text-white uppercase font-mono tracking-wider text-[11px]">Core Products</div>
+                <ul class="space-y-2">
+                    <li><a href="pesaguard.html" class="hover:text-white transition-colors">PesaGuard (Finance)</a></li>
+                    <li><a href="pipeforge.html" class="hover:text-white transition-colors">PipeForge (Pipelines)</a></li>
+                    <li><a href="datapure.html" class="hover:text-white transition-colors">DataPure AI (Quality)</a></li>
+                    <li><a href="observeflow.html" class="hover:text-white transition-colors">ObserveFlow (Telemetry)</a></li>
+                    <li><a href="lineageflow.html" class="hover:text-white transition-colors">LineageFlow (Mapping)</a></li>
                 </ul>
             </div>
 
-            <div class="space-y-4">
-                <h4 class="font-bold text-white text-sm">Solutions</h4>
-                <ul class="space-y-2 text-sm text-dfMuted">
-                    <li><a href="#architecture" class="hover:text-white transition-colors">Enterprise Streaming</a></li>
-                    <li><a href="#ai-platform" class="hover:text-white transition-colors">Autonomous AI Agents</a></li>
-                    <li><a href="#technology" class="hover:text-white transition-colors">Cloud Infrastructure</a></li>
-                    <li><a href="#company" class="hover:text-white transition-colors">Global Compliance</a></li>
+            <div class="space-y-3 font-light">
+                <div class="font-bold text-white uppercase font-mono tracking-wider text-[11px]">Analytics & AI</div>
+                <ul class="space-y-2">
+                    <li><a href="catalogiq.html" class="hover:text-white transition-colors">CatalogIQ (Data Catalog)</a></li>
+                    <li><a href="querymind.html" class="hover:text-white transition-colors">QueryMind (Conversational SQL)</a></li>
+                    <li><a href="pipelines.html" class="hover:text-white transition-colors">Pipeline Studio</a></li>
+                    <li><a href="agents.html" class="hover:text-white transition-colors">AI Agent Command Center</a></li>
+                    <li><a href="network.html" class="hover:text-white transition-colors">Global Cluster Topology</a></li>
                 </ul>
             </div>
 
-            <div class="space-y-4">
-                <h4 class="font-bold text-white text-sm">Company</h4>
-                <ul class="space-y-2 text-sm text-dfMuted">
-                    <li><a href="#company" class="hover:text-white transition-colors">About Us</a></li>
-                    <li><a href="#company" class="hover:text-white transition-colors">Careers</a></li>
-                    <li><a href="#resources" class="hover:text-white transition-colors">Resources</a></li>
-                    <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+            <div class="space-y-3 font-light">
+                <div class="font-bold text-white uppercase font-mono tracking-wider text-[11px]">Trust & Compliance</div>
+                <ul class="space-y-2">
+                    <li><a href="security.html" class="hover:text-white transition-colors">Security Center</a></li>
+                    <li><a href="status.html" class="hover:text-white transition-colors">System Status</a></li>
+                    <li><a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    <li><a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    <li><a href="docs.html" class="hover:text-white transition-colors">Documentation</a></li>
                 </ul>
-            </div>
-
-        </div>
-
-        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-dfBorder flex flex-col sm:flex-row items-center justify-between text-xs text-dfMuted">
-            <div>&copy; 2026 DataForge Labs, Inc. All rights reserved.</div>
-            <div class="flex items-center gap-6 mt-4 sm:mt-0">
-                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
-                <a href="#" class="hover:text-white transition-colors">Security</a>
             </div>
         </div>
     </footer>
 
-    <!-- Initialize Lucide Icons -->
+    <!-- Interactive Script -->
     <script>
         lucide.createIcons();
 
@@ -894,14 +527,6 @@
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             document.getElementById('scroll-progress').style.width = scrolled + '%';
-        });
-
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
         });
     </script>
 </body>
