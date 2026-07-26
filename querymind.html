@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QueryMind AI | Natural Language SQL & Conversational Analytics | DataForge Labs</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dfBg: '#040816',
+                        dfSecondaryBg: '#0A1022',
+                        dfCard: 'rgba(255, 255, 255, 0.03)',
+                        dfPrimary: '#00E676',
+                        dfSecondary: '#00B8FF',
+                        dfAccent: '#7C4DFF',
+                        dfHighlight: '#00FFD1',
+                        dfText: '#FFFFFF',
+                        dfMuted: '#B7C3D7',
+                        dfBorder: 'rgba(255, 255, 255, 0.08)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    keyframes: {
+                        aurora: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        }
+                    },
+                    animation: {
+                        aurora: 'aurora 15s ease infinite alternate',
+                        float: 'float 6s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            background-color: #040816;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(4, 8, 22, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(124, 77, 255, 0.4);
+            box-shadow: 0 0 35px rgba(124, 77, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .aurora-bg {
+            position: absolute;
+            width: 650px;
+            height: 650px;
+            filter: blur(150px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.35;
+            animation: aurora 12s infinite alternate;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #040816;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #FFFFFF 30%, #B7C3D7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-glow-purple {
+            background: linear-gradient(135deg, #7C4DFF 0%, #00B8FF 50%, #00E676 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid-overlay {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="custom-scrollbar grid-overlay">
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-dfAccent via-dfSecondary to-dfPrimary z-50 w-0 transition-all duration-75"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-dfAccent to-dfSecondary p-[1px] flex items-center justify-center transition-transform group-hover:scale-105">
+                    <div class="w-full h-full bg-dfBg rounded-xl flex items-center justify-center">
+                        <i data-lucide="message-square" class="w-5 h-5 text-dfAccent group-hover:text-dfHighlight transition-colors"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-xl tracking-wide text-white">QueryMind <span class="text-dfAccent">AI</span></span>
+                    <span class="text-[10px] tracking-widest text-dfMuted uppercase font-medium">by DataForge Labs</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-dfMuted">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="querymind.html" class="text-white font-semibold transition-colors">QueryMind AI</a>
+                <a href="catalogiq.html" class="hover:text-white transition-colors">CatalogIQ</a>
+                <a href="lineageflow.html" class="hover:text-white transition-colors">LineageFlow</a>
+                <a href="docs.html" class="hover:text-white transition-colors">Docs</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="index.html#contact" class="px-5 py-2.5 bg-gradient-to-r from-dfAccent to-dfSecondary text-white font-bold rounded-xl text-xs hover:opacity-95 transition-all shadow-lg shadow-dfAccent/25 flex items-center gap-2">
+                    <span>Deploy QueryMind</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="pt-32 pb-24">
+        
+        <section class="relative min-h-[75vh] flex items-center justify-center px-6 overflow-hidden">
+            <div class="aurora-bg bg-dfAccent top-10 left-1/4"></div>
+            <div class="aurora-bg bg-dfSecondary bottom-10 right-1/4"></div>
+
+            <div class="max-w-5xl mx-auto text-center space-y-8 z-10">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dfSecondaryBg border border-dfBorder text-xs font-mono text-dfAccent shadow-xl">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-dfAccent"></i>
+                    <span>QueryMind v4.1 • Natural Language SQL & Conversational Analytics</span>
+                </div>
+
+                <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gradient leading-tight">
+                    Conversational SQL Analytics & <span class="text-glow-purple">Natural Language Data Warehousing</span>
+                </h1>
+
+                <p class="text-lg sm:text-xl text-dfMuted max-w-3xl mx-auto font-light leading-relaxed">
+                    Empower non-technical executives and data analysts alike to query petabyte-scale data lakes using plain human language. QueryMind AI translates natural questions into optimized SQL in milliseconds.
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+                    <a href="index.html#contact" class="px-8 py-4 bg-dfAccent text-white font-bold rounded-xl hover:opacity-90 transition-all shadow-lg shadow-dfAccent/25 flex items-center gap-3">
+                        <span>Schedule QueryMind Demo</span>
+                        <i data-lucide="calendar" class="w-5 h-5"></i>
+                    </a>
+                    <a href="docs.html" class="px-8 py-4 glass-card font-semibold rounded-xl hover:bg-white/10 transition-all flex items-center gap-3 text-white border border-dfBorder">
+                        <i data-lucide="file-text" class="w-5 h-5 text-dfAccent"></i>
+                        <span>Read Technical Spec</span>
+                    </a>
+                </div>
+
+                <!-- Metrics Ribbon -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 max-w-4xl mx-auto border-t border-dfBorder">
+                    <div class="p-4 glass-card rounded-2xl text-center">
+                        <div class="font-display text-3xl font-bold text-dfAccent">&lt; 300ms</div>
+                        <div class="text-[11px] text-dfMuted font-mono uppercase mt-1">NL-to-SQL Speed</div>
+                    </div>
+                    <div class="p-4 glass-card rounded-2xl text-center">
+                        <div class="font-display text-3xl font-bold text-white">99.4%</div>
+                        <div class="text-[11px] text-dfMuted font-mono uppercase mt-1">SQL Generation Accuracy</div>
+                    </div>
+                    <div class="p-4 glass-card rounded-2xl text-center">
+                        <div class="font-display text-3xl font-bold text-dfHighlight">Snowflake</div>
+                        <div class="text-[11px] text-dfMuted font-mono uppercase mt-1">& BigQuery Native</div>
+                    </div>
+                    <div class="p-4 glass-card rounded-2xl text-center">
+                        <div class="font-display text-3xl font-bold text-dfSecondary">Secure RBAC</div>
+                        <div class="text-[11px] text-dfMuted font-mono uppercase mt-1">Role-Based Access</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Conversational Chat Simulator -->
+        <section class="py-16 max-w-7xl mx-auto px-6">
+            <div class="glass-card rounded-3xl p-8 lg:p-12 border border-dfBorder relative overflow-hidden space-y-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-dfBorder">
+                    <div>
+                        <div class="text-xs font-mono text-dfAccent uppercase tracking-widest">Conversational Intelligence</div>
+                        <h2 class="font-display text-2xl font-bold text-white mt-1">QueryMind AI Live Conversational SQL Generator</h2>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="px-3 py-1.5 rounded-full bg-dfAccent/10 border border-dfAccent/30 text-xs font-mono text-dfAccent">
+                            <span class="w-2 h-2 rounded-full bg-dfAccent animate-ping"></span>
+                            LLM AGENT READY
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-4 font-mono text-xs">
+                        <div class="p-4 rounded-2xl bg-dfBg border border-dfBorder space-y-2">
+                            <div class="text-white flex items-center gap-2">
+                                <span class="text-dfAccent">User:</span> "Compare Q1 vs Q2 recurring revenue for enterprise accounts in EMEA"
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-dfBg border border-dfAccent/40 space-y-2">
+                            <div class="text-dfAccent flex justify-between">
+                                <span>[QueryMind-Agent] Generated Optimized SQL (240ms)</span>
+                                <span class="text-dfPrimary">EXECUTED</span>
+                            </div>
+                            <pre class="text-dfMuted overflow-x-auto p-2"><code><span class="text-dfAccent">SELECT</span> region, SUM(arr) <span class="text-dfAccent">AS</span> total_arr, quarter 
+<span class="text-dfAccent">FROM</span> enterprise_ledger_2026 
+<span class="text-dfAccent">WHERE</span> region = <span class="text-dfHighlight">'EMEA'</span> <span class="text-dfAccent">AND</span> quarter <span class="text-dfAccent">IN</span> (<span class="text-dfHighlight">'Q1'</span>, <span class="text-dfHighlight">'Q2'</span>)
+<span class="text-dfAccent">GROUP BY</span> region, quarter;</code></pre>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-dfBg border border-dfBorder space-y-2">
+                            <div class="text-dfSecondary flex justify-between">
+                                <span>[Result Visualizer]</span>
+                                <span>14.2% Growth Verified</span>
+                            </div>
+                            <div class="text-dfMuted text-[11px]">Rendered instant executive chart: Q1 ($42.1M) → Q2 ($48.1M).</div>
+                        </div>
+                    </div>
+
+                    <!-- Side Specs -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <h3 class="font-display font-bold text-white text-lg flex items-center gap-2">
+                            <i data-lucide="message-square" class="w-5 h-5 text-dfAccent"></i> Key QueryMind Advantages
+                        </h3>
+                        <ul class="space-y-4 text-xs text-dfMuted font-light">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-dfAccent flex-shrink-0 mt-0.5"></i>
+                                <span><strong>Zero SQL Barrier:</strong> Allow business stakeholders and product managers to extract insights instantly using plain English.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-dfAccent flex-shrink-0 mt-0.5"></i>
+                                <span><strong>Enterprise Data Warehouse Native:</strong> Direct integration with Snowflake, Databricks, BigQuery, and PostgreSQL.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-dfAccent flex-shrink-0 mt-0.5"></i>
+                                <span><strong>Strict RBAC Security:</strong> QueryMind respects existing table permissions, ensuring users only query data they are authorized to view.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Callout -->
+        <section class="py-16 max-w-7xl mx-auto px-6 text-center">
+            <div class="glass-card rounded-3xl p-12 relative overflow-hidden border border-dfBorder">
+                <div class="absolute inset-0 bg-gradient-to-r from-dfAccent/10 via-dfSecondary/10 to-dfPrimary/15 opacity-50"></div>
+                <div class="relative z-10 space-y-6 max-w-3xl mx-auto">
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white">Democratize Data Analytics Across Your Entire Organization</h2>
+                    <p class="text-dfMuted text-base font-light">Schedule a personalized walkthrough of QueryMind AI with our analytics team.</p>
+                    <div class="pt-4 flex justify-center gap-4">
+                        <a href="index.html#contact" class="px-8 py-4 bg-dfAccent text-white font-bold rounded-xl hover:opacity-90 transition-all shadow-lg shadow-dfAccent/25 flex items-center gap-2">
+                            <span>Request QueryMind Demo</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dfSecondaryBg border-t border-dfBorder py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-dfMuted">
+            <div>&copy; 2026 DataForge Labs, Inc. QueryMind AI Platform. All rights reserved.</div>
+            <div class="flex items-center gap-6 mt-4 sm:mt-0">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="querymind.html" class="text-white transition-colors">QueryMind AI</a>
+                <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        lucide.createIcons();
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+    </script>
+</body>
+</html>
+
