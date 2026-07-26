@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipeline Studio & Studio Console | DataForge Labs</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dfBg: '#040816',
+                        dfSecondaryBg: '#0A1022',
+                        dfCard: 'rgba(255, 255, 255, 0.03)',
+                        dfPrimary: '#00E676',
+                        dfSecondary: '#00B8FF',
+                        dfAccent: '#7C4DFF',
+                        dfHighlight: '#00FFD1',
+                        dfText: '#FFFFFF',
+                        dfMuted: '#B7C3D7',
+                        dfBorder: 'rgba(255, 255, 255, 0.08)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    keyframes: {
+                        aurora: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        }
+                    },
+                    animation: {
+                        aurora: 'aurora 15s ease infinite alternate',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            background-color: #040816;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(4, 8, 22, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 230, 118, 0.4);
+            box-shadow: 0 0 35px rgba(0, 230, 118, 0.15);
+        }
+
+        .aurora-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            filter: blur(140px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.3;
+            animation: aurora 12s infinite alternate;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #040816;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #FFFFFF 30%, #B7C3D7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid-overlay {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="custom-scrollbar grid-overlay">
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-dfPrimary via-dfSecondary to-dfAccent z-50 w-0 transition-all duration-75"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-dfPrimary to-dfSecondary p-[1px] flex items-center justify-center transition-transform group-hover:scale-105">
+                    <div class="w-full h-full bg-dfBg rounded-xl flex items-center justify-center">
+                        <i data-lucide="cpu" class="w-5 h-5 text-dfPrimary group-hover:text-dfHighlight transition-colors"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-xl tracking-wide text-white">DataForge <span class="text-dfPrimary">Studio</span></span>
+                    <span class="text-[10px] tracking-widest text-dfMuted uppercase font-medium">Pipeline Orchestrator</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-dfMuted">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="status.html" class="hover:text-white transition-colors">System Status</a>
+                <a href="docs.html" class="hover:text-white transition-colors">Docs</a>
+                <a href="pipelines.html" class="text-white font-semibold transition-colors">Pipeline Studio</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <button onclick="alert('Deploying active DAG pipeline to cluster...');" class="px-5 py-2.5 bg-gradient-to-r from-dfPrimary to-dfSecondary text-dfBg font-bold rounded-xl text-xs hover:opacity-95 transition-all shadow-lg shadow-dfPrimary/20 flex items-center gap-2">
+                    <i data-lucide="play" class="w-4 h-4 fill-dfBg"></i>
+                    <span>Deploy Pipeline</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-24 max-w-7xl mx-auto px-6 space-y-8">
+        <div class="aurora-bg bg-dfPrimary top-20 left-10"></div>
+        <div class="aurora-bg bg-dfAccent bottom-10 right-10"></div>
+
+        <!-- Studio Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 glass-card p-6 rounded-3xl border border-dfBorder">
+            <div>
+                <div class="text-xs font-mono text-dfPrimary uppercase tracking-widest mb-1">Visual DAG Orchestrator v4.5</div>
+                <h1 class="font-display text-2xl sm:text-3xl font-bold text-white">PipeForge Real-Time Studio</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="alert('Adding new ingestion source node...');" class="px-4 py-2 bg-dfSecondaryBg border border-dfBorder rounded-xl text-xs font-mono text-dfMuted hover:text-white flex items-center gap-2">
+                    <i data-lucide="plus" class="w-3.5 h-3.5 text-dfPrimary"></i> Add Node
+                </button>
+                <button onclick="alert('Simulating data stream execution...');" class="px-4 py-2 bg-dfPrimary text-dfBg rounded-xl text-xs font-bold flex items-center gap-2 hover:bg-dfHighlight transition-colors">
+                    <i data-lucide="zap" class="w-3.5 h-3.5"></i> Run Simulation
+                </button>
+            </div>
+        </div>
+
+        <!-- Visual Pipeline Workflow Builder Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Nodes Toolbox Sidebar -->
+            <div class="lg:col-span-3 space-y-4">
+                <div class="glass-card rounded-2xl p-6 space-y-4 border border-dfBorder">
+                    <h3 class="font-display font-bold text-white text-sm">Pipeline Components</h3>
+                    <div class="space-y-2 text-xs font-mono text-dfMuted">
+                        <div class="p-3 rounded-xl bg-dfSecondaryBg border border-dfBorder flex items-center gap-3 cursor-pointer hover:border-dfPrimary transition-colors">
+                            <i data-lucide="database" class="w-4 h-4 text-dfPrimary"></i>
+                            <span>Apache Kafka Source</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-dfSecondaryBg border border-dfBorder flex items-center gap-3 cursor-pointer hover:border-dfSecondary transition-colors">
+                            <i data-lucide="cpu" class="w-4 h-4 text-dfSecondary"></i>
+                            <span>AI Cleansing Agent</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-dfSecondaryBg border border-dfBorder flex items-center gap-3 cursor-pointer hover:border-dfAccent transition-colors">
+                            <i data-lucide="git-branch" class="w-4 h-4 text-dfAccent"></i>
+                            <span>Apache Flink Join</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-dfSecondaryBg border border-dfBorder flex items-center gap-3 cursor-pointer hover:border-dfHighlight transition-colors">
+                            <i data-lucide="hard-drive" class="w-4 h-4 text-dfHighlight"></i>
+                            <span>Snowflake Sink</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Workflow Canvas Area -->
+            <div class="lg:col-span-9 glass-card rounded-3xl p-8 border border-dfBorder space-y-6">
+                <div class="flex items-center justify-between pb-4 border-b border-dfBorder">
+                    <div class="text-sm font-mono text-white">Active DAG Workflow: <span class="text-dfPrimary">global-tx-reconciliation-v4</span></div>
+                    <span class="text-xs font-mono text-dfHighlight bg-dfHighlight/10 px-2.5 py-1 rounded">HEALTHY • 14ms LATENCY</span>
+                </div>
+
+                <!-- Workflow Flow Visualizer -->
+                <div class="space-y-6 py-6">
+                    <div class="p-4 rounded-2xl bg-dfSecondaryBg border border-dfBorder flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-dfPrimary/10 text-dfPrimary flex items-center justify-center">
+                                <i data-lucide="database" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">1. Multi-Region Kafka Cluster</h4>
+                                <p class="text-xs text-dfMuted">Ingesting high-frequency financial events</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-mono text-dfPrimary">2.4 TB/sec</span>
+                    </div>
+
+                    <div class="flex justify-center text-dfPrimary animate-bounce">
+                        <i data-lucide="arrow-down" class="w-5 h-5"></i>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-dfSecondaryBg border border-dfBorder flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-dfSecondary/10 text-dfSecondary flex items-center justify-center">
+                                <i data-lucide="cpu" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">2. Autonomous AI Cleansing Agent</h4>
+                                <p class="text-xs text-dfMuted">Real-time schema sanitization & anomaly detection</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-mono text-dfSecondary">Active (99.9%)</span>
+                    </div>
+
+                    <div class="flex justify-center text-dfSecondary animate-bounce">
+                        <i data-lucide="arrow-down" class="w-5 h-5"></i>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-dfSecondaryBg border border-dfBorder flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-dfHighlight/10 text-dfHighlight flex items-center justify-center">
+                                <i data-lucide="hard-drive" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">3. Snowflake Enterprise Data Warehouse</h4>
+                                <p class="text-xs text-dfMuted">Zero-latency destination sink</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-mono text-dfHighlight">Synced</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dfSecondaryBg border-t border-dfBorder py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-dfMuted">
+            <div>&copy; 2026 DataForge Labs, Inc. All rights reserved.</div>
+            <div class="flex items-center gap-6 mt-4 sm:mt-0">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="pipelines.html" class="text-white transition-colors">Pipeline Studio</a>
+                <a href="status.html" class="hover:text-white transition-colors">System Status</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        lucide.createIcons();
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+    </script>
+</body>
+</html>
+
