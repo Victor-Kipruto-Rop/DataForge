@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Careers | DataForge Labs</title>
+    <title>Enterprise Engineering Case Studies | DataForge Labs</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -32,21 +32,17 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
                     },
                     keyframes: {
                         aurora: {
                             '0%': { backgroundPosition: '0% 50%' },
                             '50%': { backgroundPosition: '100% 50%' },
                             '100%': { backgroundPosition: '0% 50%' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' },
                         }
                     },
                     animation: {
                         aurora: 'aurora 15s ease infinite alternate',
-                        float: 'float 6s ease-in-out infinite',
                     }
                 }
             }
@@ -73,8 +69,8 @@
 
         .glass-card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -92,7 +88,7 @@
             filter: blur(140px);
             border-radius: 50%;
             z-index: -1;
-            opacity: 0.35;
+            opacity: 0.3;
             animation: aurora 12s infinite alternate;
         }
 
@@ -109,12 +105,6 @@
 
         .text-gradient {
             background: linear-gradient(135deg, #FFFFFF 30%, #B7C3D7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .text-glow {
-            background: linear-gradient(135deg, #00E676 0%, #00B8FF 50%, #7C4DFF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -141,176 +131,180 @@
                     </div>
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-display font-bold text-xl tracking-wide text-white">DataForge <span class="text-dfPrimary">Labs</span></span>
-                    <span class="text-[10px] tracking-widest text-dfMuted uppercase font-medium">Careers Portal</span>
+                    <span class="font-display font-bold text-xl tracking-wide text-white">DataForge <span class="text-dfPrimary">Engineering</span></span>
+                    <span class="text-[10px] tracking-widest text-dfMuted uppercase font-medium">Production Case Studies</span>
                 </div>
             </a>
 
             <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-dfMuted">
                 <a href="index.html" class="hover:text-white transition-colors">Home</a>
-                <a href="about.html" class="hover:text-white transition-colors">About</a>
-                <a href="careers.html" class="text-white font-semibold transition-colors">Careers</a>
-                <a href="index.html#products" class="hover:text-white transition-colors">Products</a>
-                <a href="index.html#contact" class="hover:text-white transition-colors">Contact</a>
+                <a href="solutions.html" class="hover:text-white transition-colors">Solutions</a>
+                <a href="customers.html" class="text-white font-semibold transition-colors">Case Studies</a>
+                <a href="pricing.html" class="hover:text-white transition-colors">Pricing</a>
+                <a href="docs.html" class="hover:text-white transition-colors">Docs</a>
             </nav>
 
             <div class="flex items-center gap-4">
-                <a href="#openings" class="px-5 py-2.5 bg-gradient-to-r from-dfPrimary to-dfSecondary text-dfBg font-bold rounded-xl text-xs hover:opacity-95 transition-all shadow-lg shadow-dfPrimary/20 flex items-center gap-2">
-                    <span>View Openings</span>
-                    <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                <a href="index.html#contact" class="px-5 py-2.5 bg-gradient-to-r from-dfPrimary to-dfHighlight text-dfBg font-bold rounded-xl text-xs hover:opacity-95 transition-all shadow-lg shadow-dfPrimary/20 flex items-center gap-2">
+                    <span>Talk to Architecture</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </a>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="pt-32 pb-24">
+    <main class="pt-32 pb-24 max-w-7xl mx-auto px-6 space-y-16">
+        <div class="aurora-bg bg-dfPrimary top-20 left-10"></div>
+        <div class="aurora-bg bg-dfAccent bottom-10 right-10"></div>
 
-        <!-- Hero Section -->
-        <section class="relative min-h-[60vh] flex items-center justify-center text-center px-6 overflow-hidden">
-            <div class="aurora-bg bg-dfSecondary top-10 left-1/3"></div>
-            <div class="aurora-bg bg-dfPrimary bottom-10 right-1/3"></div>
-
-            <div class="max-w-4xl mx-auto space-y-6 z-10 animate-float">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dfSecondaryBg border border-dfBorder text-xs font-medium text-dfHighlight shadow-lg">
-                    <i data-lucide="briefcase" class="w-3.5 h-3.5"></i>
-                    <span>Join the Core Engineering Team</span>
-                </div>
-
-                <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gradient">
-                    Shape the Future of <span class="text-glow">Intelligent Data</span>
-                </h1>
-
-                <p class="text-lg sm:text-xl text-dfMuted max-w-2xl mx-auto font-light leading-relaxed">
-                    We're assembling a world-class team of distributed systems engineers, AI researchers, and cloud architects to power global enterprise infrastructure.
-                </p>
+        <!-- Header -->
+        <div class="space-y-4 text-center max-w-3xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-dfPrimary/10 text-dfPrimary text-xs font-mono">
+                <i data-lucide="terminal" class="w-4 h-4"></i> Production Case Studies & Architecture
             </div>
-        </section>
+            <h1 class="font-display text-4xl sm:text-6xl font-bold text-white">How Engineering Teams Scale on DataForge</h1>
+            <p class="text-dfMuted text-base font-light">
+                Unfiltered technical breakdowns from core infrastructure leads scaling high-throughput Kafka clusters, real-time banking reconciliation, and multi-region data lakes.
+            </p>
+        </div>
 
-        <!-- Why Join Us Perks -->
-        <section class="py-16 max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <span class="text-xs font-bold uppercase tracking-widest text-dfPrimary px-3 py-1 rounded bg-dfPrimary/10">Why DataForge</span>
-                <h2 class="font-display text-3xl sm:text-5xl font-bold text-white">Engineered for Exceptional Talent</h2>
-                <p class="text-dfMuted text-lg font-light">We provide the autonomy, cutting-edge tech stack, and resources you need to do the best work of your career.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-card rounded-2xl p-8 space-y-4">
-                    <div class="w-12 h-12 rounded-xl bg-dfPrimary/10 text-dfPrimary flex items-center justify-center">
-                        <i data-lucide="globe" class="w-6 h-6"></i>
+        <!-- Case Studies Grid -->
+        <div class="space-y-12">
+            
+            <!-- Case Study 1: Stanbic Kenya / Financial Ledger -->
+            <div class="glass-card rounded-3xl p-8 lg:p-12 border border-dfBorder space-y-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-dfBorder">
+                    <div>
+                        <div class="text-xs font-mono text-dfPrimary uppercase tracking-widest">Core Banking & Financial Settlement</div>
+                        <h2 class="font-display text-2xl lg:text-3xl font-bold text-white mt-1">Stanbic Kenya: Eliminating Batch Reconciliation Latency</h2>
                     </div>
-                    <h3 class="font-display text-xl font-bold text-white">Remote-First Culture</h3>
-                    <p class="text-sm text-dfMuted font-light leading-relaxed">
-                        Work from anywhere in the world with flexible hours and top-tier home office setup stipends.
-                    </p>
+                    <div class="flex items-center gap-2">
+                        <span class="px-3 py-1.5 rounded-full bg-dfPrimary/10 border border-dfPrimary/30 text-xs font-mono text-dfPrimary">
+                            PesaGuard + PipeForge
+                        </span>
+                    </div>
                 </div>
 
-                <div class="glass-card rounded-2xl p-8 space-y-4">
-                    <div class="w-12 h-12 rounded-xl bg-dfSecondary/10 text-dfSecondary flex items-center justify-center">
-                        <i data-lucide="trending-up" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="font-display text-xl font-bold text-white">Competitive Equity</h3>
-                    <p class="text-sm text-dfMuted font-light leading-relaxed">
-                        Generous stock options and equity grants so every team member shares directly in our enterprise growth.
-                    </p>
-                </div>
-
-                <div class="glass-card rounded-2xl p-8 space-y-4">
-                    <div class="w-12 h-12 rounded-xl bg-dfAccent/10 text-dfAccent flex items-center justify-center">
-                        <i data-lucide="cpu" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="font-display text-xl font-bold text-white">Cutting-Edge Tech Stack</h3>
-                    <p class="text-sm text-dfMuted font-light leading-relaxed">
-                        Build with Apache Kafka, Flink, PyTorch, Rust, and advanced multi-agent autonomous AI systems daily.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Open Positions Section -->
-        <section id="openings" class="py-20 bg-dfSecondaryBg relative">
-            <div class="max-w-7xl mx-auto px-6 space-y-8">
-                <div class="text-center max-w-3xl mx-auto space-y-4">
-                    <span class="text-xs font-bold uppercase tracking-widest text-dfSecondary px-3 py-1 rounded bg-dfSecondary/10">Current Openings</span>
-                    <h2 class="font-display text-3xl sm:text-5xl font-bold text-white">Open Positions</h2>
-                    <p class="text-dfMuted text-lg font-light">Find your next role and help us scale our enterprise infrastructure engine.</p>
-                </div>
-
-                <div class="space-y-4 max-w-4xl mx-auto">
-                    <!-- Job Card 1 -->
-                    <div class="glass-card rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                        <div class="space-y-1">
-                            <div class="flex items-center gap-3">
-                                <span class="text-xs font-mono text-dfPrimary bg-dfPrimary/10 px-2 py-0.5 rounded">Engineering</span>
-                                <span class="text-xs text-dfMuted">Remote (Global)</span>
-                            </div>
-                            <h3 class="font-display text-xl font-bold text-white pt-1">Senior Distributed Systems Engineer</h3>
-                            <p class="text-xs text-dfMuted font-light">Lead high-throughput Kafka and Apache Flink stream processing engine scaling.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-7 space-y-4 text-sm text-dfMuted font-light leading-relaxed">
+                        <p>
+                            <strong class="text-white">The Challenge:</strong> Stanbic Kenya’s legacy end-of-day batch settlement jobs routinely caused 4-hour processing queues during peak transactional spikes, making real-time fraud detection impossible across multi-branch ATM and mobile channels.
+                        </p>
+                        <p>
+                            <strong class="text-white">The Solution:</strong> The infrastructure engineering team migrated their core event streams from isolated on-premise servers to a distributed DataForge multi-region cluster utilizing <code class="text-dfPrimary font-mono">PesaGuard</code> for atomic double-entry verification and <code class="text-secondary font-mono">PipeForge</code> for zero-latency Kafka DAG execution.
+                        </p>
+                        <div class="p-4 rounded-2xl bg-dfBg border border-dfBorder font-mono text-xs text-dfMuted space-y-1">
+                            <div class="text-white font-semibold">Technical Stack Migration:</div>
+                            <div>• Ingestion: Apache Kafka (US-East / EU-Central)</div>
+                            <div>• Engine: PesaGuard Atomic Reconciliation v4.5</div>
+                            <div>• Sink: Enterprise Snowflake Data Warehouse</div>
                         </div>
-                        <button onclick="alert('Application modal opened for Senior Distributed Systems Engineer.');" class="px-6 py-3 bg-dfPrimary text-dfBg font-bold rounded-xl text-xs hover:bg-dfHighlight transition-all whitespace-nowrap">
-                            Apply Now
-                        </button>
                     </div>
 
-                    <!-- Job Card 2 -->
-                    <div class="glass-card rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                        <div class="space-y-1">
-                            <div class="flex items-center gap-3">
-                                <span class="text-xs font-mono text-dfSecondary bg-dfSecondary/10 px-2 py-0.5 rounded">AI & ML Research</span>
-                                <span class="text-xs text-dfMuted">Remote / London</span>
+                    <div class="lg:col-span-5 bg-dfSecondaryBg rounded-2xl p-6 border border-dfBorder space-y-6">
+                        <div class="font-display font-bold text-white text-base">Verified Production Metrics</div>
+                        <div class="space-y-4 font-mono text-xs">
+                            <div class="flex justify-between items-center pb-3 border-b border-dfBorder">
+                                <span class="text-dfMuted">Reconciliation Latency</span>
+                                <span class="text-dfPrimary font-bold text-sm">12ms (down from 4 hrs)</span>
                             </div>
-                            <h3 class="font-display text-xl font-bold text-white pt-1">AI Agent Research Scientist</h3>
-                            <p class="text-xs text-dfMuted font-light">Design autonomous multi-agent neural models for predictive data pipeline healing.</p>
-                        </div>
-                        <button onclick="alert('Application modal opened for AI Agent Research Scientist.');" class="px-6 py-3 bg-dfSecondary text-dfBg font-bold rounded-xl text-xs hover:opacity-90 transition-all whitespace-nowrap">
-                            Apply Now
-                        </button>
-                    </div>
-
-                    <!-- Job Card 3 -->
-                    <div class="glass-card rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                        <div class="space-y-1">
-                            <div class="flex items-center gap-3">
-                                <span class="text-xs font-mono text-dfAccent bg-dfAccent/10 px-2 py-0.5 rounded">Cloud Infrastructure</span>
-                                <span class="text-xs text-dfMuted">San Francisco, CA / Remote</span>
+                            <div class="flex justify-between items-center pb-3 border-b border-dfBorder">
+                                <span class="text-dfMuted">Daily Transaction Volume</span>
+                                <span class="text-white font-bold text-sm">4.5M events/sec</span>
                             </div>
-                            <h3 class="font-display text-xl font-bold text-white pt-1">Staff Kubernetes & DevOps Architect</h3>
-                            <p class="text-xs text-dfMuted font-light">Manage multi-region active-active Kubernetes clusters across AWS, GCP, and Azure.</p>
-                        </div>
-                        <button onclick="alert('Application modal opened for Staff Kubernetes & DevOps Architect.');" class="px-6 py-3 bg-dfAccent text-dfBg font-bold rounded-xl text-xs hover:opacity-90 transition-all whitespace-nowrap">
-                            Apply Now
-                        </button>
-                    </div>
-
-                    <!-- Job Card 4 -->
-                    <div class="glass-card rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                        <div class="space-y-1">
-                            <div class="flex items-center gap-3">
-                                <span class="text-xs font-mono text-dfHighlight bg-dfHighlight/10 px-2.5 py-0.5 rounded">Security & Compliance</span>
-                                <span class="text-xs text-dfMuted">Remote (US/EU)</span>
+                            <div class="flex justify-between items-center">
+                                <span class="text-dfMuted">Discrepancy Resolution</span>
+                                <span class="text-dfHighlight font-bold text-sm">100% Autonomous</span>
                             </div>
-                            <h3 class="font-display text-xl font-bold text-white pt-1">Enterprise Security & Compliance Lead</h3>
-                            <p class="text-xs text-dfMuted font-light">Oversee SOC2, HIPAA, and GDPR compliance frameworks for global enterprise banking clients.</p>
                         </div>
-                        <button onclick="alert('Application modal opened for Enterprise Security & Compliance Lead.');" class="px-6 py-3 bg-dfHighlight text-dfBg font-bold rounded-xl text-xs hover:opacity-90 transition-all whitespace-nowrap">
-                            Apply Now
-                        </button>
+                        <blockquote class="text-xs text-dfMuted italic border-l-2 border-dfPrimary pl-4 py-1">
+                            "DataForge allowed us to transition from batch auditing to continuous sub-millisecond ledger balancing without rewriting our core banking schemas."
+                        </blockquote>
                     </div>
                 </div>
             </div>
-        </section>
+
+            <!-- Case Study 2: Global Payment Gateway / Data Quality & Observability -->
+            <div class="glass-card rounded-3xl p-8 lg:p-12 border border-dfBorder space-y-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-dfBorder">
+                    <div>
+                        <div class="text-xs font-mono text-dfSecondary uppercase tracking-widest">High-Volume Payment Ingestion</div>
+                        <h2 class="font-display text-2xl lg:text-3xl font-bold text-white mt-1">Tier-1 Payment Processor: Stopping Schema Drift Outages</h2>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-3 py-1.5 rounded-full bg-dfSecondary/10 border border-dfSecondary/30 text-xs font-mono text-dfSecondary">
+                            DataPure AI + ObserveFlow
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-7 space-y-4 text-sm text-dfMuted font-light leading-relaxed">
+                        <p>
+                            <strong class="text-white">The Challenge:</strong> Frequent, undocumented payload alterations from international payment acquirers caused downstream Spark ETL pipeline failures, breaking analytics dashboards and alerting on-call engineers at midnight.
+                        </p>
+                        <p>
+                            <strong class="text-white">The Solution:</strong> Deployed <code class="text-dfSecondary font-mono">DataPure AI</code> neural sanitization agents and <code class="text-dfHighlight font-mono">ObserveFlow</code> predictive telemetry. Incoming payloads with type mismatches are now dynamically patched or isolated into quarantine buckets without halting pipeline throughput.
+                        </p>
+                        <div class="p-4 rounded-2xl bg-dfBg border border-dfBorder font-mono text-xs text-dfMuted space-y-1">
+                            <div class="text-white font-semibold">Technical Stack Migration:</div>
+                            <div>• Ingestion: REST Webhooks & Kafka Sinks</div>
+                            <div>• AI Layer: DataPure Autonomous Schema Patching</div>
+                            <div>• Monitoring: ObserveFlow Predictive Prometheus Telemetry</div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-dfSecondaryBg rounded-2xl p-6 border border-dfBorder space-y-6">
+                        <div class="font-display font-bold text-white text-base">Verified Production Metrics</div>
+                        <div class="space-y-4 font-mono text-xs">
+                            <div class="flex justify-between items-center pb-3 border-b border-dfBorder">
+                                <span class="text-dfMuted">Pipeline Outages Caused by Schema Drift</span>
+                                <span class="text-dfSecondary font-bold text-sm">Zero (down from 14/mo)</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b border-dfBorder">
+                                <span class="text-dfMuted">Anomaly Detection Speed</span>
+                                <span class="text-white font-bold text-sm">&lt; 4.1ms</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-dfMuted">Engineering On-Call Pages</span>
+                                <span class="text-dfHighlight font-bold text-sm">-92% Reduction</span>
+                            </div>
+                        </div>
+                        <blockquote class="text-xs text-dfMuted italic border-l-2 border-dfSecondary pl-4 py-1">
+                            "DataPure AI acts like an intelligent shock absorber for our data streams. Upstream changes no longer break our analytical pipelines."
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CTA Callout -->
+        <div class="glass-card rounded-3xl p-12 text-center relative overflow-hidden border border-dfBorder space-y-6 max-w-4xl mx-auto">
+            <div class="absolute inset-0 bg-gradient-to-r from-dfPrimary/10 via-dfSecondary/10 to-dfAccent/15 opacity-50"></div>
+            <div class="relative z-10 space-y-4">
+                <h2 class="font-display text-3xl font-bold text-white">Review Your Architecture With Our Systems Leads</h2>
+                <p class="text-dfMuted text-sm font-light max-w-xl mx-auto">Bring your throughput numbers and SLA requirements. We will map out a custom streaming topology for your team.</p>
+                <div class="pt-2">
+                    <a href="index.html#contact" class="px-8 py-4 bg-dfPrimary text-dfBg font-bold rounded-xl text-xs hover:bg-dfHighlight transition-all shadow-lg shadow-dfPrimary/20 inline-flex items-center gap-2">
+                        <span>Schedule Technical Architecture Call</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
 
     </main>
 
     <!-- Footer -->
     <footer class="bg-dfSecondaryBg border-t border-dfBorder py-12">
         <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-dfMuted">
-            <div>&copy; 2026 DataForge Labs, Inc. All rights reserved.</div>
+            <div>&copy; 2026 DataForge Labs, Inc. Case Studies & Architecture. All rights reserved.</div>
             <div class="flex items-center gap-6 mt-4 sm:mt-0">
                 <a href="index.html" class="hover:text-white transition-colors">Home</a>
-                <a href="about.html" class="hover:text-white transition-colors">About Us</a>
-                <a href="careers.html" class="text-white transition-colors">Careers</a>
+                <a href="customers.html" class="text-white transition-colors">Case Studies</a>
+                <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
             </div>
         </div>
     </footer>
@@ -329,4 +323,3 @@
     </script>
 </body>
 </html>
-
