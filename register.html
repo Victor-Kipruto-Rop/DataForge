@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Workspace Registration | DataForge Labs</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dfBg: '#040816',
+                        dfSecondaryBg: '#0A1022',
+                        dfCard: 'rgba(255, 255, 255, 0.03)',
+                        dfPrimary: '#00E676',
+                        dfSecondary: '#00B8FF',
+                        dfAccent: '#7C4DFF',
+                        dfHighlight: '#00FFD1',
+                        dfText: '#FFFFFF',
+                        dfMuted: '#B7C3D7',
+                        dfBorder: 'rgba(255, 255, 255, 0.08)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    keyframes: {
+                        aurora: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        }
+                    },
+                    animation: {
+                        aurora: 'aurora 15s ease infinite alternate',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            background-color: #040816;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 230, 118, 0.4);
+            box-shadow: 0 0 35px rgba(0, 230, 118, 0.15);
+        }
+
+        .aurora-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            filter: blur(140px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.35;
+            animation: aurora 12s infinite alternate;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #040816;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #FFFFFF 30%, #B7C3D7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid-overlay {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="custom-scrollbar grid-overlay min-h-screen flex items-center justify-center p-6">
+
+    <div class="aurora-bg bg-dfSecondary top-10 right-10"></div>
+    <div class="aurora-bg bg-dfAccent bottom-10 left-10"></div>
+
+    <div class="max-w-md w-full space-y-8 z-10 py-12">
+        
+        <!-- Brand Logo Header -->
+        <div class="text-center space-y-3">
+            <a href="index.html" class="inline-flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-dfSecondary to-dfPrimary p-[1px] flex items-center justify-center">
+                    <div class="w-full h-full bg-dfBg rounded-2xl flex items-center justify-center">
+                        <i data-lucide="cpu" class="w-6 h-6 text-dfSecondary"></i>
+                    </div>
+                </div>
+            </a>
+            <h1 class="font-display text-2xl sm:text-3xl font-bold text-white">Create Enterprise Workspace</h1>
+            <p class="text-dfMuted text-xs font-light">
+                Provision your organization cluster & AI agent network
+            </p>
+        </div>
+
+        <!-- Registration Form Card -->
+        <div class="glass-card rounded-3xl p-8 border border-dfBorder space-y-6">
+            <form onsubmit="event.preventDefault(); alert('Workspace provisioned successfully! Redirecting to Console...');" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono text-dfMuted mb-2">Organization Name</label>
+                    <input type="text" required placeholder="Global Financial Corp" class="w-full px-4 py-3 rounded-xl bg-dfBg border border-dfBorder text-white text-sm focus:outline-none focus:border-dfPrimary transition-colors">
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-dfMuted mb-2">Work Email</label>
+                    <input type="email" required placeholder="alex@enterprise.com" class="w-full px-4 py-3 rounded-xl bg-dfBg border border-dfBorder text-white text-sm focus:outline-none focus:border-dfPrimary transition-colors">
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-dfMuted mb-2">Select Cloud Region</label>
+                    <select class="w-full px-4 py-3 rounded-xl bg-dfBg border border-dfBorder text-white text-sm focus:outline-none focus:border-dfPrimary transition-colors">
+                        <option>US East (N. Virginia) — AWS</option>
+                        <option>EU West (Frankfurt) — GCP</option>
+                        <option>AP Southeast (Singapore) — Azure</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-dfMuted mb-2">Password</label>
+                    <input type="password" required placeholder="••••••••••••" class="w-full px-4 py-3 rounded-xl bg-dfBg border border-dfBorder text-white text-sm focus:outline-none focus:border-dfPrimary transition-colors">
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-dfSecondary to-dfPrimary text-dfBg font-bold rounded-xl text-xs hover:opacity-90 transition-all shadow-lg shadow-dfSecondary/20 flex items-center justify-center gap-2">
+                    <span>Provision Cluster Workspace</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </form>
+
+            <div class="text-center pt-2">
+                <span class="text-xs text-dfMuted">Already have an organization cluster? </span>
+                <a href="login.html" class="text-xs text-dfPrimary font-semibold hover:underline">Sign in</a>
+            </div>
+        </div>
+
+        <div class="text-center text-xs text-dfMuted">
+            By registering, you agree to our <a href="privacy.html" class="text-white hover:underline">Privacy Policy</a> and enterprise SLA terms.
+        </div>
+
+    </div>
+
+    <!-- Interactive Script -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+
