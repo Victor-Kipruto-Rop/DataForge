@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CatalogIQ | AI Data Catalog & Semantic Search | DataForge Labs</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dfBg: '#040816',
+                        dfSecondaryBg: '#0A1022',
+                        dfCard: 'rgba(255, 255, 255, 0.03)',
+                        dfPrimary: '#00E676',
+                        dfSecondary: '#00B8FF',
+                        dfAccent: '#7C4DFF',
+                        dfHighlight: '#00FFD1',
+                        dfText: '#FFFFFF',
+                        dfMuted: '#B7C3D7',
+                        dfBorder: 'rgba(255, 255, 255, 0.08)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    keyframes: {
+                        aurora: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        }
+                    },
+                    animation: {
+                        aurora: 'aurora 15s ease infinite alternate',
+                        float: 'float 6s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            background-color: #040816;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(4, 8, 22, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 255, 209, 0.4);
+            box-shadow: 0 0 35px rgba(0, 255, 209, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .aurora-bg {
+            position: absolute;
+            width: 650px;
+            height: 650px;
+            filter: blur(150px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.35;
+            animation: aurora 12s infinite alternate;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #040816;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #FFFFFF 30%, #B7C3D7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-glow-mint {
+            background: linear-gradient(135deg, #00FFD1 0%, #00E676 50%, #00B8FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid-overlay {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="custom-scrollbar grid-overlay">
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-dfHighlight via-dfPrimary to-dfSecondary z-50 w-0 transition-all duration-75"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-dfHighlight to-dfPrimary p-[1px] flex items-center justify-center transition-transform group-hover:scale-105">
+                    <div class="w-full h-full bg-dfBg rounded-xl flex items-center justify-center">
+                        <i data-lucide="database" class="w-5 h-5 text-dfHighlight group-hover:text-dfPrimary transition-colors"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-xl tracking-wide text-white">Catalog<span class="text-dfHighlight">IQ</span></span>
+                    <span class="text-[10px] tracking-widest text-dfMuted uppercase font-medium">by DataForge Labs</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-dfMuted">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="catalogiq.html" class="text-white font-semibold transition-colors">CatalogIQ</a>
+                <a href="lineageflow.html" class="hover:text-white transition-colors">LineageFlow</a>
+                <a href="observeflow.html" class="hover:text-white transition-colors">ObserveFlow</a>
+                <a href="docs.html" class="hover:text-white transition-colors">Docs</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="index.html#contact" class="px-5 py-2.5 bg-gradient-to-r from-dfHighlight to-dfPrimary text-dfBg font-bold rounded-xl text-xs hover:opacity-95 transition-all shadow-lg shadow-dfHighlight/20 flex items-center gap-2">
+                    <span>Deploy CatalogIQ</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="pt-32 pb-24">
+        
+        <section class="relative min-h-[75vh] flex items-center justify-center px-6 overflow-hidden">
+            <div class="aurora-bg bg-dfHighlight top-10 left-1/4"></div>
+            <div class="aurora-bg bg-dfPrimary bottom-10 right-1/4"></div>
+
+            <div class="max-w-5xl mx-auto text-center space-y-8 z-10">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dfSecondaryBg border border-dfBorder text-xs font-mono text-dfHighlight shadow-xl">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-dfHighlight"></i>
+                    <span>CatalogIQ v4.2 • AI Data Catalog & Semantic Search Engine</span>
+                </div>
+
+                <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gradient leading-tight">
+                    AI-Powered Data Catalog & <span class="text-glow-mint">Semantic Natural Language Search</span>
+                </h1>
+
+                <p class="text-lg sm:text-xl text-dfMuted max-w-3xl mx-auto font-light leading-relaxed">
+                    Instantly search petabyte-scale data lakes using plain human language. CatalogIQ automatically tags assets, enforces governance policies, and maps semantic relationships across your entire enterprise architecture.
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+                    <a href="index.html#contact" class="px-8 py-4 bg-dfHighlight text-dfBg font-bold rounded-xl hover:opacity-90 transition-all shadow-lg shadow-dfHighlight/25 flex items-center gap-3">
+                        <span>Schedule Catalog Demo</span>
+                        <i data-lucide="calendar" class="w-5 h-5"></i>
+                    </a>
+                    <a href="docs.html" class="px-8 py-4 glass-card font-semibold rounded-xl hover:bg-white/10 transition-all flex items-center gap-3 text-white border border-dfBorder">
+                        <i data-lucide="file-text" class="w-5 h-5 text-dfHighlight"></i>
+                        <span>Read Catalog Spec</span>
+                    </a>
+                </div>
+
+                <!-- Metrics Ribbon -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 max-w-4xl mx-auto border-t border-dfBorder">
+                    <div class="p-4 glass-card rounded-2xl text-center">
+                        <div class="font-display text-3xl font-bold text-dfHighlight">&lt; 200ms</div>
+                        <div class="text-[11px] text-dfMuted font-mono uppercase mt-1">Semantic Search Speed</div>
+                    </div>
+                    <div class="p-4 glass-card rounded-2xl text-center">
+                        <div class="font-display text-3xl font-bold text-white">Vector DB</div>
+                        <div class="text-[11px] text-dfMuted font-mono uppercase mt-1">Embedding Core</div>
+                    </div>
+                    <div class="p-4 glass-card rounded-2xl text-center">
+                        <div class="font-display text-3xl font-bold text-dfPrimary">100%</div>
+                        <div class="text-[11px] text-dfMuted font-mono uppercase mt-1">Automated Asset Tagging</div>
+                    </div>
+                    <div class="p-4 glass-card rounded-2xl text-center">
+                        <div class="font-display text-3xl font-bold text-dfSecondary">OpenAI / LLM</div>
+                        <div class="text-[11px] text-dfMuted font-mono uppercase mt-1">Natural Language Query</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Semantic Search Playground Simulator -->
+        <section class="py-16 max-w-7xl mx-auto px-6">
+            <div class="glass-card rounded-3xl p-8 lg:p-12 border border-dfBorder relative overflow-hidden space-y-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-dfBorder">
+                    <div>
+                        <div class="text-xs font-mono text-dfHighlight uppercase tracking-widest">Semantic Discovery Engine</div>
+                        <h2 class="font-display text-2xl font-bold text-white mt-1">CatalogIQ Live Natural Language Query Simulator</h2>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="px-3 py-1.5 rounded-full bg-dfHighlight/10 border border-dfHighlight/30 text-xs font-mono text-dfHighlight">
+                            <span class="w-2 h-2 rounded-full bg-dfHighlight animate-ping"></span>
+                            VECTOR EMBEDDINGS ACTIVE
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-4 font-mono text-xs">
+                        <div class="p-4 rounded-2xl bg-dfBg border border-dfHighlight/40 space-y-2">
+                            <div class="text-dfHighlight flex justify-between">
+                                <span>Query: "Show me all Q2 European customer payment transactions with failed status"</span>
+                                <span>MATCHED (142ms)</span>
+                            </div>
+                            <div class="text-dfMuted text-[11px]">Found asset: <code class="text-white">snowflake_dw.finance.eu_tx_failed_q2</code> • Tagged: <code class="text-dfPrimary">Verified PII</code> • <code class="text-dfSecondary">GDPR Compliant</code></div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-dfBg border border-dfBorder space-y-2">
+                            <div class="text-dfPrimary flex justify-between">
+                                <span>[AI Tagging Engine] Auto-Classified 4,200 New Columns</span>
+                                <span>SUCCESS</span>
+                            </div>
+                            <div class="text-dfMuted text-[11px]">Assigned metadata definitions and semantic relationships across Snowflake and Databricks sinks.</div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-dfBg border border-dfBorder space-y-2">
+                            <div class="text-dfSecondary flex justify-between">
+                                <span>[Governance Policy Enforcer]</span>
+                                <span>SECURE</span>
+                            </div>
+                            <div class="text-dfMuted text-[11px]">Restricted unauthorized user access to sensitive healthcare datasets automatically.</div>
+                        </div>
+                    </div>
+
+                    <!-- Side Specs -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <h3 class="font-display font-bold text-white text-lg flex items-center gap-2">
+                            <i data-lucide="database" class="w-5 h-5 text-dfHighlight"></i> Key CatalogIQ Advantages
+                        </h3>
+                        <ul class="space-y-4 text-xs text-dfMuted font-light">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-dfHighlight flex-shrink-0 mt-0.5"></i>
+                                <span><strong>Natural Language Discovery:</strong> Find obscure tables, columns, and metrics instantly by typing conversational queries.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-dfHighlight flex-shrink-0 mt-0.5"></i>
+                                <span><strong>Automated Metadata Tagging:</strong> AI models generate comprehensive descriptions, data ownership badges, and usage glossaries.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-dfHighlight flex-shrink-0 mt-0.5"></i>
+                                <span><strong>Enterprise Policy Enforcement:</strong> Automatically restrict PII and confidential datasets based on role-based governance rules.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Callout -->
+        <section class="py-16 max-w-7xl mx-auto px-6 text-center">
+            <div class="glass-card rounded-3xl p-12 relative overflow-hidden border border-dfBorder">
+                <div class="absolute inset-0 bg-gradient-to-r from-dfHighlight/10 via-dfPrimary/10 to-dfSecondary/15 opacity-50"></div>
+                <div class="relative z-10 space-y-6 max-w-3xl mx-auto">
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white">Transform Your Enterprise Data Discovery with CatalogIQ</h2>
+                    <p class="text-dfMuted text-base font-light">Schedule a personalized walkthrough with our data architecture specialists.</p>
+                    <div class="pt-4 flex justify-center gap-4">
+                        <a href="index.html#contact" class="px-8 py-4 bg-dfHighlight text-dfBg font-bold rounded-xl hover:opacity-90 transition-all shadow-lg shadow-dfHighlight/20 flex items-center gap-2">
+                            <span>Request CatalogIQ Demo</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dfSecondaryBg border-t border-dfBorder py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-dfMuted">
+            <div>&copy; 2026 DataForge Labs, Inc. CatalogIQ Platform. All rights reserved.</div>
+            <div class="flex items-center gap-6 mt-4 sm:mt-0">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="catalogiq.html" class="text-white transition-colors">CatalogIQ</a>
+                <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        lucide.createIcons();
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+    </script>
+</body>
+</html>
+
