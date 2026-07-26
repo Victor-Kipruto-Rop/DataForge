@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pipeline Studio & Studio Console | DataForge Labs</title>
+    <title>Pipeline Studio & DAG Orchestrator | DataForge Labs</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -32,6 +32,7 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
                     },
                     keyframes: {
                         aurora: {
@@ -68,22 +69,17 @@
 
         .glass-card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .glass-card:hover {
-            border-color: rgba(0, 230, 118, 0.4);
-            box-shadow: 0 0 35px rgba(0, 230, 118, 0.15);
-        }
-
         .aurora-bg {
             position: absolute;
-            width: 600px;
-            height: 600px;
-            filter: blur(140px);
+            width: 700px;
+            height: 700px;
+            filter: blur(160px);
             border-radius: 50%;
             z-index: -1;
             opacity: 0.3;
@@ -112,6 +108,17 @@
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
                               linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
         }
+
+        .dag-node {
+            background: rgba(10, 16, 34, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.3s ease;
+        }
+
+        .dag-node:hover {
+            border-color: #00E676;
+            box-shadow: 0 0 25px rgba(0, 230, 118, 0.2);
+        }
     </style>
 </head>
 <body class="custom-scrollbar grid-overlay">
@@ -125,138 +132,120 @@
             <a href="index.html" class="flex items-center gap-3 group">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-dfPrimary to-dfSecondary p-[1px] flex items-center justify-center transition-transform group-hover:scale-105">
                     <div class="w-full h-full bg-dfBg rounded-xl flex items-center justify-center">
-                        <i data-lucide="cpu" class="w-5 h-5 text-dfPrimary group-hover:text-dfHighlight transition-colors"></i>
+                        <i data-lucide="layout" class="w-5 h-5 text-dfPrimary group-hover:text-dfHighlight transition-colors"></i>
                     </div>
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-display font-bold text-xl tracking-wide text-white">DataForge <span class="text-dfPrimary">Studio</span></span>
-                    <span class="text-[10px] tracking-widest text-dfMuted uppercase font-medium">Pipeline Orchestrator</span>
+                    <span class="font-display font-bold text-xl tracking-wide text-white">Pipeline <span class="text-dfPrimary">Studio</span></span>
+                    <span class="text-[10px] tracking-widest text-dfMuted uppercase font-medium">Visual DAG Orchestrator</span>
                 </div>
             </a>
 
             <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-dfMuted">
                 <a href="index.html" class="hover:text-white transition-colors">Home</a>
-                <a href="status.html" class="hover:text-white transition-colors">System Status</a>
-                <a href="docs.html" class="hover:text-white transition-colors">Docs</a>
+                <a href="solutions.html" class="hover:text-white transition-colors">Solutions</a>
                 <a href="pipelines.html" class="text-white font-semibold transition-colors">Pipeline Studio</a>
+                <a href="agents.html" class="hover:text-white transition-colors">AI Agents</a>
+                <a href="docs.html" class="hover:text-white transition-colors">Docs</a>
             </nav>
 
             <div class="flex items-center gap-4">
-                <button onclick="alert('Deploying active DAG pipeline to cluster...');" class="px-5 py-2.5 bg-gradient-to-r from-dfPrimary to-dfSecondary text-dfBg font-bold rounded-xl text-xs hover:opacity-95 transition-all shadow-lg shadow-dfPrimary/20 flex items-center gap-2">
-                    <i data-lucide="play" class="w-4 h-4 fill-dfBg"></i>
-                    <span>Deploy Pipeline</span>
+                <button onclick="alert('DAG pipeline deployment initialized on cluster kafka-us-east-01.');" class="px-5 py-2.5 bg-gradient-to-r from-dfPrimary to-dfHighlight text-dfBg font-bold rounded-xl text-xs hover:opacity-95 transition-all shadow-lg shadow-dfPrimary/20 flex items-center gap-2">
+                    <span>Deploy DAG Live</span>
+                    <i data-lucide="play" class="w-4 h-4"></i>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="pt-32 pb-24 max-w-7xl mx-auto px-6 space-y-8">
-        <div class="aurora-bg bg-dfPrimary top-20 left-10"></div>
-        <div class="aurora-bg bg-dfAccent bottom-10 right-10"></div>
+    <main class="pt-32 pb-24 max-w-7xl mx-auto px-6 space-y-12">
+        <div class="aurora-bg bg-dfPrimary top-20 left-1/4"></div>
+        <div class="aurora-bg bg-dfSecondary bottom-10 right-1/4"></div>
 
-        <!-- Studio Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 glass-card p-6 rounded-3xl border border-dfBorder">
-            <div>
-                <div class="text-xs font-mono text-dfPrimary uppercase tracking-widest mb-1">Visual DAG Orchestrator v4.5</div>
-                <h1 class="font-display text-2xl sm:text-3xl font-bold text-white">PipeForge Real-Time Studio</h1>
+        <!-- Studio Header & Controls -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-dfBorder">
+            <div class="space-y-1">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-dfPrimary/10 text-dfPrimary text-xs font-mono">
+                    <span class="w-2 h-2 rounded-full bg-dfPrimary animate-ping"></span> Live Studio Workspace: DAG_ID #8821-FX
+                </div>
+                <h1 class="font-display text-3xl font-bold text-white">Visual Stream Orchestrator</h1>
             </div>
+
             <div class="flex items-center gap-3">
-                <button onclick="alert('Adding new ingestion source node...');" class="px-4 py-2 bg-dfSecondaryBg border border-dfBorder rounded-xl text-xs font-mono text-dfMuted hover:text-white flex items-center gap-2">
-                    <i data-lucide="plus" class="w-3.5 h-3.5 text-dfPrimary"></i> Add Node
+                <button onclick="alert('Configuration saved to cluster registry.');" class="px-4 py-2 bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary rounded-xl text-xs font-mono text-white transition-all flex items-center gap-2">
+                    <i data-lucide="save" class="w-3.5 h-3.5"></i> Save Blueprint
                 </button>
-                <button onclick="alert('Simulating data stream execution...');" class="px-4 py-2 bg-dfPrimary text-dfBg rounded-xl text-xs font-bold flex items-center gap-2 hover:bg-dfHighlight transition-colors">
-                    <i data-lucide="zap" class="w-3.5 h-3.5"></i> Run Simulation
+                <button onclick="alert('Running dry-run validation tests... All 4 nodes verified successfully.');" class="px-4 py-2 bg-dfSecondaryBg border border-dfBorder hover:border-dfPrimary rounded-xl text-xs font-mono text-dfPrimary transition-all flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Dry-Run Validate
                 </button>
             </div>
         </div>
 
-        <!-- Visual Pipeline Workflow Builder Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            <!-- Nodes Toolbox Sidebar -->
-            <div class="lg:col-span-3 space-y-4">
-                <div class="glass-card rounded-2xl p-6 space-y-4 border border-dfBorder">
-                    <h3 class="font-display font-bold text-white text-sm">Pipeline Components</h3>
-                    <div class="space-y-2 text-xs font-mono text-dfMuted">
-                        <div class="p-3 rounded-xl bg-dfSecondaryBg border border-dfBorder flex items-center gap-3 cursor-pointer hover:border-dfPrimary transition-colors">
-                            <i data-lucide="database" class="w-4 h-4 text-dfPrimary"></i>
-                            <span>Apache Kafka Source</span>
-                        </div>
-                        <div class="p-3 rounded-xl bg-dfSecondaryBg border border-dfBorder flex items-center gap-3 cursor-pointer hover:border-dfSecondary transition-colors">
-                            <i data-lucide="cpu" class="w-4 h-4 text-dfSecondary"></i>
-                            <span>AI Cleansing Agent</span>
-                        </div>
-                        <div class="p-3 rounded-xl bg-dfSecondaryBg border border-dfBorder flex items-center gap-3 cursor-pointer hover:border-dfAccent transition-colors">
-                            <i data-lucide="git-branch" class="w-4 h-4 text-dfAccent"></i>
-                            <span>Apache Flink Join</span>
-                        </div>
-                        <div class="p-3 rounded-xl bg-dfSecondaryBg border border-dfBorder flex items-center gap-3 cursor-pointer hover:border-dfHighlight transition-colors">
-                            <i data-lucide="hard-drive" class="w-4 h-4 text-dfHighlight"></i>
-                            <span>Snowflake Sink</span>
-                        </div>
-                    </div>
-                </div>
+        <!-- Interactive Visual DAG Canvas Simulator -->
+        <div class="glass-card rounded-3xl p-8 lg:p-10 border border-dfBorder relative overflow-hidden space-y-8">
+            <div class="flex items-center justify-between">
+                <div class="text-xs font-mono text-dfMuted uppercase tracking-wider">Topology Map • 4 Nodes Connected</div>
+                <div class="text-xs font-mono text-dfPrimary">Status: STREAMING (12.4ms latency)</div>
             </div>
 
-            <!-- Interactive Workflow Canvas Area -->
-            <div class="lg:col-span-9 glass-card rounded-3xl p-8 border border-dfBorder space-y-6">
-                <div class="flex items-center justify-between pb-4 border-b border-dfBorder">
-                    <div class="text-sm font-mono text-white">Active DAG Workflow: <span class="text-dfPrimary">global-tx-reconciliation-v4</span></div>
-                    <span class="text-xs font-mono text-dfHighlight bg-dfHighlight/10 px-2.5 py-1 rounded">HEALTHY • 14ms LATENCY</span>
+            <!-- Simulated Visual Flow Nodes -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative py-6">
+                
+                <!-- Node 1 -->
+                <div class="dag-node rounded-2xl p-6 space-y-3 relative">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-mono text-dfPrimary uppercase">01. Source</span>
+                        <i data-lucide="database" class="w-4 h-4 text-dfPrimary"></i>
+                    </div>
+                    <div class="font-display font-bold text-white text-sm">Kafka Multi-Region Ingestion</div>
+                    <div class="text-[11px] text-dfMuted font-mono">Rate: 45,000 evt/sec</div>
                 </div>
 
-                <!-- Workflow Flow Visualizer -->
-                <div class="space-y-6 py-6">
-                    <div class="p-4 rounded-2xl bg-dfSecondaryBg border border-dfBorder flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-dfPrimary/10 text-dfPrimary flex items-center justify-center">
-                                <i data-lucide="database" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-white text-sm">1. Multi-Region Kafka Cluster</h4>
-                                <p class="text-xs text-dfMuted">Ingesting high-frequency financial events</p>
-                            </div>
-                        </div>
-                        <span class="text-xs font-mono text-dfPrimary">2.4 TB/sec</span>
+                <!-- Node 2 -->
+                <div class="dag-node rounded-2xl p-6 space-y-3 relative">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-mono text-dfSecondary uppercase">02. Transformation</span>
+                        <i data-lucide="Cpu" class="w-4 h-4 text-dfSecondary"></i>
                     </div>
-
-                    <div class="flex justify-center text-dfPrimary animate-bounce">
-                        <i data-lucide="arrow-down" class="w-5 h-5"></i>
-                    </div>
-
-                    <div class="p-4 rounded-2xl bg-dfSecondaryBg border border-dfBorder flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-dfSecondary/10 text-dfSecondary flex items-center justify-center">
-                                <i data-lucide="cpu" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-white text-sm">2. Autonomous AI Cleansing Agent</h4>
-                                <p class="text-xs text-dfMuted">Real-time schema sanitization & anomaly detection</p>
-                            </div>
-                        </div>
-                        <span class="text-xs font-mono text-dfSecondary">Active (99.9%)</span>
-                    </div>
-
-                    <div class="flex justify-center text-dfSecondary animate-bounce">
-                        <i data-lucide="arrow-down" class="w-5 h-5"></i>
-                    </div>
-
-                    <div class="p-4 rounded-2xl bg-dfSecondaryBg border border-dfBorder flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-dfHighlight/10 text-dfHighlight flex items-center justify-center">
-                                <i data-lucide="hard-drive" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-white text-sm">3. Snowflake Enterprise Data Warehouse</h4>
-                                <p class="text-xs text-dfMuted">Zero-latency destination sink</p>
-                            </div>
-                        </div>
-                        <span class="text-xs font-mono text-dfHighlight">Synced</span>
-                    </div>
+                    <div class="font-display font-bold text-white text-sm">DataPure AI Sanitizer</div>
+                    <div class="text-[11px] text-dfMuted font-mono">Schema validation active</div>
                 </div>
+
+                <!-- Node 3 -->
+                <div class="dag-node rounded-2xl p-6 space-y-3 relative">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-mono text-dfAccent uppercase">03. Reconciliation</span>
+                        <i data-lucide="shield-check" class="w-4 h-4 text-dfAccent"></i>
+                    </div>
+                    <div class="font-display font-bold text-white text-sm">PesaGuard Double-Entry</div>
+                    <div class="text-[11px] text-dfMuted font-mono">Zero discrepancies</div>
+                </div>
+
+                <!-- Node 4 -->
+                <div class="dag-node rounded-2xl p-6 space-y-3 relative">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-mono text-dfHighlight uppercase">04. Destination</span>
+                        <i data-lucide="hard-drive" class="w-4 h-4 text-dfHighlight"></i>
+                    </div>
+                    <div class="font-display font-bold text-white text-sm">Snowflake Data Warehouse</div>
+                    <div class="text-[11px] text-dfMuted font-mono">Sink sync healthy</div>
+                </div>
+
             </div>
 
+            <!-- Terminal Live Logs Output -->
+            <div class="bg-dfBg rounded-2xl p-6 border border-dfBorder space-y-3">
+                <div class="flex items-center justify-between text-xs font-mono text-dfMuted pb-2 border-b border-dfBorder">
+                    <span class="flex items-center gap-2"><i data-lucide="terminal" class="w-4 h-4 text-dfPrimary"></i> Live DAG Execution Logs</span>
+                    <span class="text-dfPrimary">CLUSTER_HEALTH: OPTIMAL</span>
+                </div>
+                <div class="font-mono text-xs space-y-1.5 text-dfMuted overflow-x-auto">
+                    <div><span class="text-dfPrimary">[15:15:20]</span> [DAG-Orchestrator] Successfully spawned 24 worker pods for kafka-us-east-01 sink.</div>
+                    <div><span class="text-dfSecondary">[15:15:22]</span> [DataPure-Agent] Schema check passed across 12,400 incoming payment payloads. Zero type anomalies detected.</div>
+                    <div><span class="text-dfHighlight">[15:15:25]</span> [ObserveFlow-Sentinel] Telemetry latency stable at 12.4ms. All multi-region replication nodes synchronized.</div>
+                </div>
+            </div>
         </div>
 
     </main>
@@ -264,7 +253,7 @@
     <!-- Footer -->
     <footer class="bg-dfSecondaryBg border-t border-dfBorder py-12">
         <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-dfMuted">
-            <div>&copy; 2026 DataForge Labs, Inc. All rights reserved.</div>
+            <div>&copy; 2026 DataForge Labs, Inc. Pipeline Studio & DAG Orchestrator. All rights reserved.</div>
             <div class="flex items-center gap-6 mt-4 sm:mt-0">
                 <a href="index.html" class="hover:text-white transition-colors">Home</a>
                 <a href="pipelines.html" class="text-white transition-colors">Pipeline Studio</a>
@@ -287,4 +276,3 @@
     </script>
 </body>
 </html>
-
