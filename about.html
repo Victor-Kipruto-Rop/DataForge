@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | DataForge Labs</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dfBg: '#040816',
+                        dfSecondaryBg: '#0A1022',
+                        dfCard: 'rgba(255, 255, 255, 0.03)',
+                        dfPrimary: '#00E676',
+                        dfSecondary: '#00B8FF',
+                        dfAccent: '#7C4DFF',
+                        dfHighlight: '#00FFD1',
+                        dfText: '#FFFFFF',
+                        dfMuted: '#B7C3D7',
+                        dfBorder: 'rgba(255, 255, 255, 0.08)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    keyframes: {
+                        aurora: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    },
+                    animation: {
+                        aurora: 'aurora 15s ease infinite alternate',
+                        float: 'float 6s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            background-color: #040816;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(4, 8, 22, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 230, 118, 0.4);
+            box-shadow: 0 0 35px rgba(0, 230, 118, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .aurora-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            filter: blur(140px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.35;
+            animation: aurora 12s infinite alternate;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #040816;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #FFFFFF 30%, #B7C3D7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-glow {
+            background: linear-gradient(135deg, #00E676 0%, #00B8FF 50%, #7C4DFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid-overlay {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="custom-scrollbar grid-overlay">
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-dfPrimary via-dfSecondary to-dfAccent z-50 w-0 transition-all duration-75"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-dfPrimary to-dfSecondary p-[1px] flex items-center justify-center transition-transform group-hover:scale-105">
+                    <div class="w-full h-full bg-dfBg rounded-xl flex items-center justify-center">
+                        <i data-lucide="cpu" class="w-5 h-5 text-dfPrimary group-hover:text-dfHighlight transition-colors"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-xl tracking-wide text-white">DataForge <span class="text-dfPrimary">Labs</span></span>
+                    <span class="text-[10px] tracking-widest text-dfMuted uppercase font-medium">Enterprise Intelligence</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-dfMuted">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="about.html" class="text-white font-semibold transition-colors">About</a>
+                <a href="index.html#products" class="hover:text-white transition-colors">Products</a>
+                <a href="index.html#architecture" class="hover:text-white transition-colors">Solutions</a>
+                <a href="index.html#technology" class="hover:text-white transition-colors">Technology</a>
+                <a href="index.html#contact" class="hover:text-white transition-colors">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="index.html#contact" class="px-5 py-2.5 bg-gradient-to-r from-dfPrimary to-dfSecondary text-dfBg font-bold rounded-xl text-xs hover:opacity-95 transition-all shadow-lg shadow-dfPrimary/20 flex items-center gap-2">
+                    <span>Get Started</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-24">
+
+        <!-- Hero Section -->
+        <section class="relative min-h-[65vh] flex items-center justify-center text-center px-6 overflow-hidden">
+            <div class="aurora-bg bg-dfPrimary top-10 left-1/4"></div>
+            <div class="aurora-bg bg-dfAccent bottom-10 right-1/4"></div>
+
+            <div class="max-w-4xl mx-auto space-y-6 z-10 animate-float">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dfSecondaryBg border border-dfBorder text-xs font-medium text-dfHighlight shadow-lg">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Pioneering Autonomous Enterprise Data Systems</span>
+                </div>
+
+                <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gradient">
+                    Architecting the World's <span class="text-glow">Data Backbone</span>
+                </h1>
+
+                <p class="text-lg sm:text-xl text-dfMuted max-w-2xl mx-auto font-light leading-relaxed">
+                    DataForge Labs was founded with a singular vision: to eliminate data latency, enforce absolute governance, and empower autonomous AI agents at petabyte scale.
+                </p>
+            </div>
+        </section>
+
+        <!-- Mission & Values Grid -->
+        <section class="py-20 max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-dfPrimary px-3 py-1 rounded bg-dfPrimary/10">Our Philosophy</span>
+                <h2 class="font-display text-3xl sm:text-5xl font-bold text-white">Built on Precision and Trust</h2>
+                <p class="text-dfMuted text-lg font-light">Every line of code and neural weight is crafted to maintain uncompromising enterprise reliability.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card rounded-2xl p-8 space-y-4 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-dfPrimary/10 rounded-full blur-xl group-hover:bg-dfPrimary/20 transition-all"></div>
+                    <div class="w-12 h-12 rounded-xl bg-dfPrimary/10 text-dfPrimary flex items-center justify-center">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white">Ultra-Low Latency</h3>
+                    <p class="text-sm text-dfMuted font-light leading-relaxed">
+                        We believe modern enterprises should never wait for analytics. Our streaming architecture delivers sub-15ms end-to-end data pipelines.
+                    </p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 space-y-4 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-dfSecondary/10 rounded-full blur-xl group-hover:bg-dfSecondary/20 transition-all"></div>
+                    <div class="w-12 h-12 rounded-xl bg-dfSecondary/10 text-dfSecondary flex items-center justify-center">
+                        <i data-lucide="cpu" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white">Autonomous Intelligence</h3>
+                    <p class="text-sm text-dfMuted font-light leading-relaxed">
+                        Human intervention is too slow for modern data drift. Our 120+ autonomous AI agents predict failures and self-heal in real-time.
+                    </p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 space-y-4 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-dfAccent/10 rounded-full blur-xl group-hover:bg-dfAccent/20 transition-all"></div>
+                    <div class="w-12 h-12 rounded-xl bg-dfAccent/10 text-dfAccent flex items-center justify-center">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white">Bulletproof Security</h3>
+                    <p class="text-sm text-dfMuted font-light leading-relaxed">
+                        SOC2 certified and HIPAA compliant by design. Your organization's sensitive corporate and customer data remains encrypted and secure.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership & Backing -->
+        <section class="py-20 bg-dfSecondaryBg relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <span class="text-xs font-bold uppercase tracking-widest text-dfSecondary px-3 py-1 rounded bg-dfSecondary/10">Leadership & Vision</span>
+                    <h2 class="font-display text-3xl sm:text-5xl font-bold text-white">Backed by World-Class Experts</h2>
+                    <p class="text-dfMuted text-lg font-light">Engineered by veterans from top distributed systems, AI research, and enterprise infrastructure labs.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="glass-card rounded-2xl p-6 text-center space-y-4">
+                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-dfPrimary to-dfSecondary mx-auto p-1">
+                            <div class="w-full h-full bg-dfBg rounded-full flex items-center justify-center font-display font-bold text-xl text-dfPrimary">
+                                VK
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-white">Victor Kipruto Rop</h3>
+                            <div class="text-xs text-dfPrimary font-mono mt-1">Founder & Chief Executive Officer</div>
+                        </div>
+                        <p class="text-xs text-dfMuted font-light">Leading software and infrastructure architect dedicated to building high-performance AI data systems.</p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 text-center space-y-4">
+                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-dfSecondary to-dfAccent mx-auto p-1">
+                            <div class="w-full h-full bg-dfBg rounded-full flex items-center justify-center font-display font-bold text-xl text-dfSecondary">
+                                DR
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-white">Dr. Elena Vance</h3>
+                            <div class="text-xs text-dfSecondary font-mono mt-1">Chief Technology Officer</div>
+                        </div>
+                        <p class="text-xs text-dfMuted font-light">Former distributed database researcher specializing in fault-tolerant Apache Kafka and Flink clusters.</p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 text-center space-y-4">
+                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-dfAccent to-dfHighlight mx-auto p-1">
+                            <div class="w-full h-full bg-dfBg rounded-full flex items-center justify-center font-display font-bold text-xl text-dfHighlight">
+                                MS
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-white">Marcus Sterling</h3>
+                            <div class="text-xs text-dfHighlight font-mono mt-1">Head of AI Agent Research</div>
+                        </div>
+                        <p class="text-xs text-dfMuted font-light">Pioneering multi-agent neural architectures for autonomous enterprise pipeline optimization.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Global Footprint Callout -->
+        <section class="py-20 max-w-7xl mx-auto px-6 text-center">
+            <div class="glass-card rounded-3xl p-12 relative overflow-hidden border border-dfBorder">
+                <div class="absolute inset-0 bg-gradient-to-r from-dfPrimary/10 via-dfSecondary/10 to-dfAccent/15 opacity-50"></div>
+                <div class="relative z-10 space-y-6 max-w-3xl mx-auto">
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white">Join 50+ Global Enterprises Transforming Their Data</h2>
+                    <p class="text-dfMuted text-base font-light">Experience the power of autonomous data engineering and intelligent infrastructure today.</p>
+                    <div class="pt-4 flex justify-center gap-4">
+                        <a href="index.html#contact" class="px-8 py-4 bg-dfPrimary text-dfBg font-bold rounded-xl hover:bg-dfHighlight transition-all shadow-lg shadow-dfPrimary/20 flex items-center gap-2">
+                            <span>Request Enterprise Demo</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dfSecondaryBg border-t border-dfBorder py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-dfMuted">
+            <div>&copy; 2026 DataForge Labs, Inc. All rights reserved.</div>
+            <div class="flex items-center gap-6 mt-4 sm:mt-0">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="about.html" class="text-white transition-colors">About Us</a>
+                <a href="index.html#contact" class="hover:text-white transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        lucide.createIcons();
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+    </script>
+</body>
+</html>
