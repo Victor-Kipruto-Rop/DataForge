@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation & SDK Reference | DataForge Labs</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dfBg: '#040816',
+                        dfSecondaryBg: '#0A1022',
+                        dfCard: 'rgba(255, 255, 255, 0.03)',
+                        dfPrimary: '#00E676',
+                        dfSecondary: '#00B8FF',
+                        dfAccent: '#7C4DFF',
+                        dfHighlight: '#00FFD1',
+                        dfText: '#FFFFFF',
+                        dfMuted: '#B7C3D7',
+                        dfBorder: 'rgba(255, 255, 255, 0.08)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    keyframes: {
+                        aurora: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    },
+                    animation: {
+                        aurora: 'aurora 15s ease infinite alternate',
+                        float: 'float 6s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            background-color: #040816;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(4, 8, 22, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 255, 209, 0.4);
+            box-shadow: 0 0 35px rgba(0, 255, 209, 0.12);
+        }
+
+        .aurora-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            filter: blur(140px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.3;
+            animation: aurora 12s infinite alternate;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #040816;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #FFFFFF 30%, #B7C3D7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-glow {
+            background: linear-gradient(135deg, #00FFD1 0%, #00B8FF 50%, #7C4DFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid-overlay {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+
+        .doc-section {
+            display: none;
+        }
+        .doc-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="custom-scrollbar grid-overlay">
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-dfHighlight via-dfSecondary to-dfAccent z-50 w-0 transition-all duration-75"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-dfHighlight to-dfSecondary p-[1px] flex items-center justify-center transition-transform group-hover:scale-105">
+                    <div class="w-full h-full bg-dfBg rounded-xl flex items-center justify-center">
+                        <i data-lucide="cpu" class="w-5 h-5 text-dfHighlight"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-xl tracking-wide text-white">DataForge <span class="text-dfHighlight">Docs</span></span>
+                    <span class="text-[10px] tracking-widest text-dfMuted uppercase font-medium">API & Developer Hub</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-dfMuted">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="about.html" class="hover:text-white transition-colors">About</a>
+                <a href="solutions.html" class="hover:text-white transition-colors">Solutions</a>
+                <a href="docs.html" class="text-white font-semibold transition-colors">Documentation</a>
+                <a href="index.html#contact" class="hover:text-white transition-colors">Support</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-dfSecondaryBg border border-dfBorder text-xs text-dfMuted font-mono">
+                    <span class="w-2 h-2 rounded-full bg-dfHighlight"></span>
+                    <span>SDK v4.5.2</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Layout -->
+    <main class="pt-28 pb-24 max-w-7xl mx-auto px-6">
+        <div class="aurora-bg bg-dfHighlight top-20 left-10"></div>
+        <div class="aurora-bg bg-dfAccent bottom-10 right-10"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Sidebar Navigation -->
+            <aside class="lg:col-span-3 space-y-6">
+                <div class="glass-card rounded-2xl p-6 space-y-4 sticky top-28 border border-dfBorder">
+                    <div class="text-xs font-mono uppercase tracking-widest text-dfHighlight font-bold">Getting Started</div>
+                    <ul class="space-y-2 text-sm text-dfMuted">
+                        <li><button onclick="switchDoc('overview')" id="nav-overview" class="doc-nav-btn text-left w-full px-3 py-2 rounded-lg bg-dfHighlight/10 text-dfHighlight font-semibold transition-all">Overview & Architecture</button></li>
+                        <li><button onclick="switchDoc('quickstart')" id="nav-quickstart" class="doc-nav-btn text-left w-full px-3 py-2 rounded-lg hover:text-white transition-all">Quickstart SDK</button></li>
+                        <li><button onclick="switchDoc('authentication')" id="nav-authentication" class="doc-nav-btn text-left w-full px-3 py-2 rounded-lg hover:text-white transition-all">Authentication & SSO</button></li>
+                    </ul>
+
+                    <div class="text-xs font-mono uppercase tracking-widest text-dfSecondary font-bold pt-4 border-t border-dfBorder">Core APIs</div>
+                    <ul class="space-y-2 text-sm text-dfMuted">
+                        <li><button onclick="switchDoc('pipelines')" id="nav-pipelines" class="doc-nav-btn text-left w-full px-3 py-2 rounded-lg hover:text-white transition-all">Pipelines API</button></li>
+                        <li><button onclick="switchDoc('agents')" id="nav-agents" class="doc-nav-btn text-left w-full px-3 py-2 rounded-lg hover:text-white transition-all">AI Agents Management</button></li>
+                        <li><button onclick="switchDoc('webhooks')" id="nav-webhooks" class="doc-nav-btn text-left w-full px-3 py-2 rounded-lg hover:text-white transition-all">Real-Time Webhooks</button></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Documentation Content Area -->
+            <div class="lg:col-span-9 space-y-8">
+                
+                <!-- SECTION 1: OVERVIEW -->
+                <div id="doc-overview" class="doc-section active glass-card rounded-3xl p-8 lg:p-12 space-y-6 border border-dfBorder">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-dfHighlight/10 text-dfHighlight text-xs font-mono">
+                        <i data-lucide="book-open" class="w-3.5 h-3.5"></i> Documentation v4.5
+                    </div>
+                    <h1 class="font-display text-3xl sm:text-4xl font-bold text-white">DataForge Core Architecture & Overview</h1>
+                    <p class="text-dfMuted text-base font-light leading-relaxed">
+                        DataForge Labs provides a unified platform for real-time stream processing, zero-latency data warehousing replication, and autonomous multi-agent governance. Our APIs are designed for high-frequency enterprise environments requiring absolute reliability.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder space-y-2">
+                            <h3 class="font-bold text-white text-sm">Streaming Ingestion</h3>
+                            <p class="text-xs text-dfMuted">High-throughput Kafka and Apache Flink connectors capable of handling millions of events per second.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder space-y-2">
+                            <h3 class="font-bold text-white text-sm">Autonomous Agents</h3>
+                            <p class="text-xs text-dfMuted">Neural multi-agent loops that monitor schema drift, auto-heal failures, and optimize SQL performance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: QUICKSTART -->
+                <div id="doc-quickstart" class="doc-section glass-card rounded-3xl p-8 lg:p-12 space-y-6 border border-dfBorder">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-dfPrimary/10 text-dfPrimary text-xs font-mono">
+                        <i data-lucide="terminal" class="w-3.5 h-3.5"></i> Quickstart SDK
+                    </div>
+                    <h1 class="font-display text-3xl sm:text-4xl font-bold text-white">Python SDK Quickstart</h1>
+                    <p class="text-dfMuted text-base font-light leading-relaxed">
+                        Install the official DataForge Python SDK and initialize your first real-time streaming pipeline in minutes.
+                    </p>
+                    <div class="p-4 rounded-xl bg-dfBg border border-dfBorder font-mono text-xs space-y-3">
+                        <div class="text-dfMuted"># Install via pip</div>
+                        <div class="text-dfPrimary">pip install dataforge-sdk</div>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-dfSecondaryBg border border-dfBorder font-mono text-xs space-y-4">
+                        <div class="text-dfMuted pb-2 border-b border-dfBorder">quick_start_pipeline.py</div>
+                        <pre class="text-dfMuted overflow-x-auto"><code><span class="text-dfAccent">from</span> dataforge <span class="text-dfAccent">import</span> DataForgeClient
+
+<span class="text-slate-500"># Initialize client with API Key</span>
+client = DataForgeClient(api_key=<span class="text-dfHighlight">"df_live_sec_9981"</span>, region=<span class="text-dfHighlight">"us-east-01"</span>)
+
+<span class="text-slate-500"># Provision a real-time Kafka streaming pipeline</span>
+pipeline = client.pipelines.create(
+    name=<span class="text-dfHighlight">"enterprise-tx-stream"</span>,
+    engine=<span class="text-dfHighlight">"flink"</span>,
+    ai_agents=<span class="text-dfSecondary">True</span>
+)
+
+pipeline.deploy()
+print(<span class="text-dfHighlight">f"Pipeline successfully deployed. ID: {pipeline.id}"</span>)</code></pre>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: AUTHENTICATION -->
+                <div id="doc-authentication" class="doc-section glass-card rounded-3xl p-8 lg:p-12 space-y-6 border border-dfBorder">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-dfSecondary/10 text-dfSecondary text-xs font-mono">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Authentication
+                    </div>
+                    <h1 class="font-display text-3xl sm:text-4xl font-bold text-white">Enterprise SSO & API Authentication</h1>
+                    <p class="text-dfMuted text-base font-light leading-relaxed">
+                        All API requests must include a valid Bearer token in the authorization header. For organization-wide access, configure SAML/Okta enterprise SSO through the admin console.
+                    </p>
+                    <div class="p-6 rounded-2xl bg-dfSecondaryBg border border-dfBorder font-mono text-xs space-y-2">
+                        <div class="text-dfMuted">curl -X GET https://api.dataforgelabs.io/v1/clusters \</div>
+                        <div class="text-dfHighlight pl-4">-H "Authorization: Bearer df_live_sec_9981" \</div>
+                        <div class="text-dfHighlight pl-4">-H "Content-Type: application/json"</div>
+                    </div>
+                </div>
+
+                <!-- SECTION 4: PIPELINES API -->
+                <div id="doc-pipelines" class="doc-section glass-card rounded-3xl p-8 lg:p-12 space-y-6 border border-dfBorder">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-dfPrimary/10 text-dfPrimary text-xs font-mono">
+                        <i data-lucide="git-merge" class="w-3.5 h-3.5"></i> REST API Reference
+                    </div>
+                    <h1 class="font-display text-3xl sm:text-4xl font-bold text-white">Pipelines API Endpoints</h1>
+                    <p class="text-dfMuted text-base font-light leading-relaxed">
+                        Programmatically create, pause, scale, and delete data ingestion pipelines using our high-performance REST endpoints.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder space-y-2">
+                            <div class="flex items-center gap-2 text-xs font-mono">
+                                <span class="px-2 py-0.5 rounded bg-dfPrimary/20 text-dfPrimary font-bold">POST</span>
+                                <span class="text-white">/v1/pipelines/deploy</span>
+                            </div>
+                            <p class="text-xs text-dfMuted">Initiates a new cluster pipeline with automated AI agent supervision.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-dfSecondaryBg border border-dfBorder space-y-2">
+                            <div class="flex items-center gap-2 text-xs font-mono">
+                                <span class="px-2 py-0.5 rounded bg-yellow-500/20 text-yellow-400 font-bold">GET</span>
+                                <span class="text-white">/v1/pipelines/{id}/telemetry</span>
+                            </div>
+                            <p class="text-xs text-dfMuted">Retrieves live event rates, latency metrics, and error logs.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 5: AI AGENTS -->
+                <div id="doc-agents" class="doc-section glass-card rounded-3xl p-8 lg:p-12 space-y-6 border border-dfBorder">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-dfAccent/10 text-dfAccent text-xs font-mono">
+                        <i data-lucide="cpu" class="w-3.5 h-3.5"></i> AI Intelligence
+                    </div>
+                    <h1 class="font-display text-3xl sm:text-4xl font-bold text-white">Autonomous AI Agent Rules</h1>
+                    <p class="text-dfMuted text-base font-light leading-relaxed">
+                        Configure customized multi-agent behaviors to automatically isolate schema anomalies, optimize storage partitions, and remediate pipeline drift without human intervention.
+                    </p>
+                </div>
+
+                <!-- SECTION 6: WEBHOOKS -->
+                <div id="doc-webhooks" class="doc-section glass-card rounded-3xl p-8 lg:p-12 space-y-6 border border-dfBorder">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-dfHighlight/10 text-dfHighlight text-xs font-mono">
+                        <i data-lucide="radio" class="w-3.5 h-3.5"></i> Event Streaming
+                    </div>
+                    <h1 class="font-display text-3xl sm:text-4xl font-bold text-white">Real-Time Webhooks</h1>
+                    <p class="text-dfMuted text-base font-light leading-relaxed">
+                        Subscribe to instant notification events when cluster health thresholds fluctuate or AI agents successfully patch schema anomalies.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dfSecondaryBg border-t border-dfBorder py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-dfMuted">
+            <div>&copy; 2026 DataForge Labs, Inc. All rights reserved.</div>
+            <div class="flex items-center gap-6 mt-4 sm:mt-0">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="about.html" class="hover:text-white transition-colors">About</a>
+                <a href="docs.html" class="text-white transition-colors">Documentation</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        lucide.createIcons();
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+
+        function switchDoc(docId) {
+            // Hide all doc sections
+            document.querySelectorAll('.doc-section').forEach(el => el.classList.remove('active'));
+            // Remove active style from all sidebar buttons
+            document.querySelectorAll('.doc-nav-btn').forEach(el => {
+                el.classList.remove('bg-dfHighlight/10', 'text-dfHighlight', 'font-semibold');
+                el.classList.add('text-dfMuted');
+            });
+
+            // Show selected section
+            document.getElementById('doc-' + docId).classList.add('active');
+            
+            // Highlight selected button
+            const activeBtn = document.getElementById('nav-' + docId);
+            activeBtn.classList.add('bg-dfHighlight/10', 'text-dfHighlight', 'font-semibold');
+            activeBtn.classList.remove('text-dfMuted');
+
+            window.scrollTo({ top: 150, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
+
